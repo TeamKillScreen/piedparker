@@ -9,6 +9,7 @@ var _ = require("lodash");
 var geolib = require("geolib");
 var Promise = require("Promise");
 var request = require("request");
+var lsq = require('least-squares');
 
 function mapper (crime) {
   return crime;
@@ -65,7 +66,8 @@ function getCrimeStats(location, date, distance)
   });
 }
 
-function getAllCrimeStats (location) {
+function getAllCrimeStats (location, distance) {
+  distance = distance || 500;
   var policeService = new PoliceService();
   var promises = [];
 
@@ -75,14 +77,49 @@ function getAllCrimeStats (location) {
     "2015-06",
     "2015-05",
     "2015-04",
-    "2015-03"
+    "2015-03",
+    "2015-02",
+    "2015-01",
+    "2014-12",
+    "2014-11",
+    "2014-10",
+    "2014-09",
   ];
 
   _.each(dates, function (date) {
-    promises.push(policeService.getCrimeStats(location, date));
+    promises.push(policeService.getCrimeStats(location, date, distance));
   });
 
   return Promise.all(promises);
+}
+
+function dateToXPoint(date)
+{
+  var arr = date.split("-");
+
+  return (arr[0] * 12) + (arr[1] * 1);
+}
+
+function computeAverageRisk (data, monthToPredict)
+{
+  monthToPredict = monthToPredict || "2015-10";
+
+  var x = [];
+  var y = [];
+
+  _.each(data, function(dateResult)
+  {
+    console.log(dateToXPoint(dateResult.date) + " => " + dateResult.crimes.length)
+
+    x.push(dateToXPoint(dateResult.date));
+    y.push(dateResult.crimes.length);
+  });
+
+  var f = lsq(x, y, {})
+
+  var xPointOfPrediction = dateToXPoint(monthToPredict);
+
+  return f(xPointOfPrediction); 
 }
 
 function PoliceService () {	
@@ -90,5 +127,6 @@ function PoliceService () {
 
 PoliceService.prototype.getCrimeStats = getCrimeStats;
 PoliceService.prototype.getAllCrimeStats = getAllCrimeStats;
+PoliceService.prototype.computeAverageRisk = computeAverageRisk;
 
 module.exports = PoliceService;
