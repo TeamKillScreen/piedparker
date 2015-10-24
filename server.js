@@ -20,9 +20,7 @@ app.get("/api/parking/", function (req, res) {
   var initFirebase = new Firebase(firebaseurl);
 
   initFirebase.set({"crime":{},"parking":{},
-    "location":{"lat":lat, "lon":lon}
-  }
-  }});
+    "location":{"lat":lat, "lon":lon}});
 
   res.json({"url":firebaseurl})
 });
