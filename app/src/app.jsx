@@ -14,19 +14,28 @@ var Main = React.createClass({displayName: 'Main',
 	getInitialState: function() {
 		var lon = getParameterByName('lon');
 		var lat = getParameterByName('lat');
+		var mode = getParameterByName('mode');
 		return {
 			parking: [],
 			lon: lon,
-			lat: lat
+			lat: lat,
+			mode: mode
 		};
 	},
 	componentWillMount: function() {
 		var component = this;
-		$.get("https://piedparker2015.azurewebsites.net/api/parking/?lat=" + component.state.lat + "&lon=" + component.state.lon, function(data) {
-			var firebaseRef = new Firebase(data.url + "/parking");
-			component.bindAsArray(firebaseRef.limitToLast(25), 'parking');
-			component.setState({fireBaseUrl: data.url});
-    	});
+		if (component.state.mode == 'test') {
+			var firebaseRef = new Firebase('https://piedparker.firebaseio.com/test' + "/parking");
+				component.bindAsArray(firebaseRef.limitToLast(25), 'parking');
+				component.setState({fireBaseUrl: 'https://piedparker.firebaseio.com/test'});
+		}
+		else {
+			$.get("https://piedparker2015.azurewebsites.net/api/parking/?lat=" + component.state.lat + "&lon=" + component.state.lon, function(data) {
+				var firebaseRef = new Firebase(data.url + "/parking");
+				component.bindAsArray(firebaseRef.limitToLast(25), 'parking');
+				component.setState({fireBaseUrl: data.url});
+			});
+		}
 	},
 	render: function() {
 		var carparks = this.state.parking.map(function(carpark, index) {
