@@ -2,6 +2,17 @@ var React = require('react');
 
 var CarPark = React.createClass(
   {
+    getDirectionsUrl: function(lat, lon){
+      var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+      var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+
+      if (isSafari) {
+        return 'http://maps.apple.com/?daddr=' + lat + ',' + lon + '&dirflg=d';
+      }
+      else {
+        return 'http://maps.google.com/?daddr=' + lat + ',' + lon + '&directionsmode=driving';
+      };
+    },
     render: function(){
       var lat = this.props.details.location.lat;
       var lon = this.props.details.location.lon;
@@ -29,8 +40,8 @@ var CarPark = React.createClass(
 					    <a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
 					      Rating
 					    </a>
-							<a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
-								Take me there
+							<a href={this.getDirectionsUrl(lat, lon)} target="_blank" className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
+								Directions
 							</a>
 							<a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
 								UBER
