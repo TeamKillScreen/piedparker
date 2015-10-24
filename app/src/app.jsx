@@ -1,4 +1,12 @@
+var CarPark = React.createClass({displayName: 'CarPark',
+	render: function() {
+		return (
+			<h1>Hello world?!</h1>
+			);
+	}
+});
+
 ReactDOM.render(
-        <h1>Hello, world!..</h1>,
-        document.getElementById('Main')
-      );
+	React.createElement(CarPark, null),
+	document.getElementById('Main')
+	);
