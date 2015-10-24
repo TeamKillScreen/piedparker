@@ -10,7 +10,9 @@ var parkingService = new ParkingService();
 
 parkingService.getParkingStats(location)
 	.then(function (data) {
-		eyes.inspect(data);		
+		if (data.length) {
+			eyes.inspect(data);
+		}
 	})
 	.catch(function (error) {
 		console.dir(error);

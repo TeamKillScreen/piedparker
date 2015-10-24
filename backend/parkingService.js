@@ -6,6 +6,7 @@
 /* global require */
 
 var _ = require("lodash");
+var eyes = require("eyes");
 var Promise = require("Promise");
 var request = require("request");
 
