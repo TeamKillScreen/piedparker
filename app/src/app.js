@@ -77,8 +77,23 @@
 						{ className: "mdl-card__actions mdl-card--border" },
 						React.createElement(
 							"a",
-							{ className: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" },
-							"Get Started"
+							{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+							"Rating"
+						),
+						React.createElement(
+							"a",
+							{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+							"Take me there"
+						),
+						React.createElement(
+							"a",
+							{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+							"Spaces"
+						),
+						React.createElement(
+							"a",
+							{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+							"UBER"
 						)
 					),
 					React.createElement(
