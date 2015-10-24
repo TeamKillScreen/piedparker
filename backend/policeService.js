@@ -90,7 +90,9 @@ function getAllCrimeStats (location, distance) {
   ];
 
   _.each(dates, function (date) {
-    promises.push(policeService.getCrimeStats(location, date, distance));
+    setTimeout(function() {
+      promises.push(policeService.getCrimeStats(location, date, distance))
+    }, 100);
   });
 
   return Promise.all(promises);
@@ -175,11 +177,14 @@ function forecastCrimeNumbers(data, monthToPredict)
     y.push(dateResult.crimes.length);
   });
 
+  if (x.length == 0)
+    return 0;
+
   var f = lsq(x, y, {});
 
   var xPointOfPrediction = dateToXPoint(monthToPredict);
 
-  return f(xPointOfPrediction); 
+  return f(xPointOfPrediction);
 }
 
 function findHighestMonth(data)
