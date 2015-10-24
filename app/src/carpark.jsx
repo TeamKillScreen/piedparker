@@ -3,10 +3,19 @@ var React = require('react');
 var CarPark = React.createClass(
   {
     render: function(){
+      var lat = this.props.details.location.lat;
+      var lon = this.props.details.location.lon;
+      var backUrl = 'https://maps.googleapis.com/maps/api/streetview?size=480x160&location=' + lat + ',' + lon + '&key=AIzaSyAckgB0_dFK2D1ERLQC2LVC0jpwsM5gjDY';
+      var backgroundStyle = {
+        color: '#fff',
+        height: '160px',
+        background: 'url(' + backUrl + ') center / cover'
+      };
+      
       return(
 				<div>
 					<div className="carpark-card-wide mdl-card mdl-shadow--2dp">
-					  <div className="mdl-card__title">
+					  <div style={backgroundStyle} className="mdl-card__title">
 					    <h1 className="mdl-card__title-text">{this.props.details.name}</h1>
 					  </div>
 					  <div className="mdl-card__supporting-text">
