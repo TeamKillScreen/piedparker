@@ -177,11 +177,14 @@ function forecastCrimeNumbers(data, monthToPredict)
     y.push(dateResult.crimes.length);
   });
 
+  if (x.length == 0)
+    return 0;
+
   var f = lsq(x, y, {});
 
   var xPointOfPrediction = dateToXPoint(monthToPredict);
 
-  return f(xPointOfPrediction); 
+  return f(xPointOfPrediction);
 }
 
 function findHighestMonth(data)
