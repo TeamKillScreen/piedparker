@@ -29,12 +29,22 @@ policeService.getAllCrimeStats(location, 250)
     console.log("Risk based on Highest Month: " + highestMonth.month)
     console.log(policeService.calculateRisk(highestMonth.numberOfCrimes));
 
-
     var currentMonth = policeService.crimesInLatestMonth(data)
 
     console.log("Risk based on Current Month: " + currentMonth.month)
     console.log(policeService.calculateRisk(currentMonth.numberOfCrimes));
+
 	})
 	.catch(function (error) {
 		console.dir(error);
 	});
+
+policeService.getAllCrimeStatsAndAnalysis(location, 250)
+  .then(function (data) {
+
+    eyes.inspect(data);
+
+  })
+  .catch(function (error) {
+    console.dir(error);
+  });
