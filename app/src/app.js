@@ -57,13 +57,13 @@
 		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 	}
 
-	var Main = React.createClass({ displayName: 'test',
+	var Main = React.createClass({ displayName: 'Main',
 		mixins: [ReactFireMixin],
 		getInitialState: function getInitialState() {
 			var lon = getParameterByName('lon');
 			var lat = getParameterByName('lat');
 			return {
-				test: [],
+				parking: [],
 				lon: lon,
 				lat: lat
 			};
@@ -73,10 +73,11 @@
 			$.get("https://piedparker2015.azurewebsites.net/api/parking/?lat=" + component.state.lat + "&lon=" + component.state.lon, function (data) {
 				var firebaseRef = new Firebase(data.url + "/parking");
 				component.bindAsArray(firebaseRef.limitToLast(25), 'parking');
+				component.setState({ fireBaseUrl: data.url });
 			});
 		},
 		render: function render() {
-			var carparks = this.state.test.map(function (carpark, index) {
+			var carparks = this.state.parking.map(function (carpark, index) {
 				return React.createElement(CarPark, { key: index, details: carpark });
 			});
 			return React.createElement(
