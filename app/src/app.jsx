@@ -1,3 +1,5 @@
+var React = require('../build/react');
+
 var CarPark = React.createClass(
   {
     render: function(){
@@ -5,7 +7,7 @@ var CarPark = React.createClass(
 				<div>
 					<div className="carpark-card-wide mdl-card mdl-shadow--2dp">
 					  <div className="mdl-card__title">
-					    <h2 className="mdl-card__title-text">{this.props.details.name}</h2>
+					    <h1 className="mdl-card__title-text">{this.props.details.name}</h1>
 					  </div>
 					  <div className="mdl-card__supporting-text">
 					    Lorem ipsum dolor sit amet, consectetur adipiscing elit.

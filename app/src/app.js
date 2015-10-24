@@ -42,9 +42,11 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
+
+	var React = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../build/react\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var CarPark = React.createClass({
 		displayName: "CarPark",
@@ -60,7 +62,7 @@
 						"div",
 						{ className: "mdl-card__title" },
 						React.createElement(
-							"h2",
+							"h1",
 							{ className: "mdl-card__title-text" },
 							this.props.details.name
 						)
