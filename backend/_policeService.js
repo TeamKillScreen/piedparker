@@ -8,7 +8,7 @@ var location = {
 
 var policeService = new PoliceService();
 
-policeService.getCrimeStats(location, "2015-08")
+policeService.getCrimeStats(location, "2015-08", 250)
 	.then(function (data) {
 		eyes.inspect(data);		
 	})
@@ -16,9 +16,24 @@ policeService.getCrimeStats(location, "2015-08")
 		console.dir(error);
 	});
 
-policeService.getAllCrimeStats(location)
+policeService.getAllCrimeStats(location, 250)
 	.then(function (data) {
-		console.log(policeService.forecastCrimeNumbers(data, "2015-10"));
+
+    var forceastForOct = policeService.forecastCrimeNumbers(data, "2015-10")
+
+    console.log("Risk based on forceast: ")
+		console.log(policeService.calculateRisk(forceastForOct));
+
+    var highestMonth = policeService.findHighestMonth(data)
+
+    console.log("Risk based on Highest Month: " + highestMonth.month)
+    console.log(policeService.calculateRisk(highestMonth.numberOfCrimes));
+
+
+    var currentMonth = policeService.crimesInLatestMonth(data)
+
+    console.log("Risk based on Current Month: " + currentMonth.month)
+    console.log(policeService.calculateRisk(currentMonth.numberOfCrimes));
 	})
 	.catch(function (error) {
 		console.dir(error);

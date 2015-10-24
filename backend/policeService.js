@@ -96,6 +96,22 @@ function getAllCrimeStats (location, distance) {
   return Promise.all(promises);
 }
 
+function calculateRisk(val)
+{
+  if (val > 10)
+  {
+    return "High";
+  }
+  else if (val > 5)
+  {
+    return "Medium";
+  }
+  else
+  {
+    return "Low";
+  }
+}
+
 function dateToXPoint(date)
 {
   var arr = date.split("-");
@@ -103,7 +119,7 @@ function dateToXPoint(date)
   return (arr[0] * 12) + (arr[1] * 1);
 }
 
-function forecastCrimeNumbers (data, monthToPredict)
+function forecastCrimeNumbers(data, monthToPredict)
 {
   monthToPredict = monthToPredict || "2015-10";
 
@@ -125,6 +141,45 @@ function forecastCrimeNumbers (data, monthToPredict)
   return f(xPointOfPrediction); 
 }
 
+function findHighestMonth(data)
+{
+  var highestVal = 0;
+  var highestMonth = "";
+
+  _.each(data, function(month) {
+
+    var numCrimes = month.crimes.length;
+
+    if(numCrimes > highestVal)
+    {
+      highestMonth = month.date;
+      highestVal = numCrimes;
+    }
+  });
+
+  return { month: highestMonth, numberOfCrimes: highestVal };
+}
+
+function crimesInLatestMonth(data)
+{
+  var highestVal = 0;
+  var highestMonth = "";
+  var numCrimes = 0;
+
+  _.each(data, function(month) {
+
+    var monthDataPoint = dateToXPoint(month.date);
+
+    if(monthDataPoint > highestVal)
+    {
+      highestMonth = month.date;
+      highestVal = monthDataPoint;
+      numCrimes = month.crimes.length
+    }
+  });
+
+  return { month: highestMonth, numberOfCrimes: numCrimes };
+}
 
 
 function PoliceService () {	
@@ -133,5 +188,8 @@ function PoliceService () {
 PoliceService.prototype.getCrimeStats = getCrimeStats;
 PoliceService.prototype.getAllCrimeStats = getAllCrimeStats;
 PoliceService.prototype.forecastCrimeNumbers = forecastCrimeNumbers;
+PoliceService.prototype.findHighestMonth = findHighestMonth;
+PoliceService.prototype.crimesInLatestMonth = crimesInLatestMonth;
+PoliceService.prototype.calculateRisk = calculateRisk;
 
 module.exports = PoliceService;
