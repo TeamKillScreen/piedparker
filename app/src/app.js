@@ -19858,7 +19858,7 @@
 			if (risk !== undefined) {
 				content = React.createElement(
 					'div',
-					{ className: 'mdl-card__supporting-text' },
+					{ className: 'mdl-card__supporting-text risks' },
 					React.createElement(
 						'div',
 						{ className: 'mdl-grid' },

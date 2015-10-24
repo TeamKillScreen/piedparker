@@ -24,7 +24,7 @@ var Crime = React.createClass(
 		var risk = _.first(_.where(this.props.details, { ".key": "risk"}));
 		if (risk !== undefined) {
 			content = (
-					<div className="mdl-card__supporting-text">
+					<div className="mdl-card__supporting-text risks">
 						<div className="mdl-grid">
 							<Risk details={risk.currentMonth} name="Current"/>
 							<Risk details={risk.highestMonth} name="Worst"/>

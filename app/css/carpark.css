@@ -19,3 +19,19 @@
 .carpark-card-wide > .mdl-card__menu {
   color: #fff;
 }
+
+.risk-Low {
+  background: rgb(76,175,80) !important;
+}
+
+.risk-Medium {
+  background-color: rgb(255,152,0) !important;
+}
+
+.risk-High {
+  background-color: rgb(244,67,54) !important;
+}
+
+.risks {
+  text-align: center;
+}
