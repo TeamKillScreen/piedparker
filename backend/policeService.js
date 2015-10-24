@@ -90,7 +90,7 @@ function getAllCrimeStats (location, distance) {
   ];
 
   _.each(dates, function (date) {
-      promises.push(policeService.getCrimeStats(location, date, distance))
+      promises.push(policeService.getCrimeStats(location, date, distance));
   });
 
   return Promise.all(promises);
@@ -175,7 +175,7 @@ function forecastCrimeNumbers(data, monthToPredict)
     y.push(dateResult.crimes.length);
   });
 
-  if (x.length == 0)
+  if (x.length === 0)
     return 0;
 
   var f = lsq(x, y, {});
@@ -218,7 +218,7 @@ function crimesInLatestMonth(data)
     {
       highestMonth = month.date;
       highestVal = monthDataPoint;
-      numCrimes = month.crimes.length
+      numCrimes = month.crimes.length;
     }
   });
 
