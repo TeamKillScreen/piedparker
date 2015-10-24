@@ -10,7 +10,7 @@ var Risk = React.createClass(
 					<button className={classes}>
 						{this.props.details.numberOfCrimes}
 					</button>
-					<div className="clear-fix"></div>
+					<p>{this.props.name}</p>
 				</div>
 			);
 		}	
@@ -26,20 +26,9 @@ var Crime = React.createClass(
 			content = (
 					<div className="mdl-card__supporting-text risks">
 						<div className="mdl-grid">
-							<Risk details={risk.currentMonth} name="Current"/>
-							<Risk details={risk.highestMonth} name="Worst"/>
-							<Risk details={risk.futureForecast} name="Forcast"/>
-						</div>
-						<div className="mdl-grid">
-							<div className="mdl-cell mdl-cell--4-col">
-								<span>Current</span>
-							</div>
-							<div className="mdl-cell mdl-cell--4-col">
-								<span>Worst</span>
-							</div>
-							<div className="mdl-cell mdl-cell--4-col">
-								<span>Forcast</span>
-							</div>
+							<Risk details={risk.currentMonth} name="Current Month"/>
+							<Risk details={risk.highestMonth} name="Worst Month"/>
+							<Risk details={risk.futureForecast} name="Furture Forcast"/>
 						</div>
 					</div>
 				);
