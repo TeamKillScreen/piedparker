@@ -118,7 +118,7 @@ function forecastCrimeNumbers (data, monthToPredict)
     y.push(dateResult.crimes.length);
   });
 
-  var f = lsq(x, y, {})
+  var f = lsq(x, y, {});
 
   var xPointOfPrediction = dateToXPoint(monthToPredict);
 
