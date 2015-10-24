@@ -56,6 +56,8 @@ function getCrimeStats(location, date, distance, category)
        
         var distance = geolib.getDistance(point1, point2);
 
+        crime.location.distance = distance;
+
         return distance <= 500;
       });
 
@@ -111,7 +113,7 @@ function computeAverageRisk (data, monthToPredict)
   _.each(data, function(dateResult)
   {
     console.log(dateToXPoint(dateResult.date) + " => " + dateResult.crimes.length)
-    
+
     x.push(dateToXPoint(dateResult.date));
     y.push(dateResult.crimes.length);
   });
