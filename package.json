@@ -26,6 +26,7 @@
     "geolib": "^2.0.18",
     "least-squares": "0.0.2",
     "lodash": "^3.10.1",
+    "log-timestamp": "^0.1.2",
     "md5": "^2.0.0",
     "promise": "^7.0.4",
     "react": "^0.14.0",

@@ -6,6 +6,16 @@
   <!--width: 480px;-->
 }
 
+.carpark-title {
+  width: 60%;
+  float: left;
+}
+
+.carpark-spaces {
+  <!--margin-top: 0.5em;-->
+  float: right;
+}
+
 .carpark-card-wide > .mdl-card__menu {
   color: #fff;
 }

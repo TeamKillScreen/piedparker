@@ -11,16 +11,19 @@ var CarPark = React.createClass(
         height: '160px',
         background: 'url(' + backUrl + ') center / cover'
       };
-      
+
       return(
 				<div>
 					<div className="carpark-card-wide mdl-card mdl-shadow--2dp">
 					  <div style={backgroundStyle} className="mdl-card__title">
-					    <h1 className="mdl-card__title-text">{this.props.details.name}</h1>
 					  </div>
 					  <div className="mdl-card__supporting-text">
-					    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					    Mauris sagittis pellentesque lacus eleifend lacinia...
+					    <div className="carpark-title">
+                <h1 className="mdl-card__title-text">{this.props.details.name}</h1>
+              </div>
+              <div className="carpark-spaces">
+                <h1 className="mdl-card__title-text">Spaces:{this.props.details.spaces}</h1>
+              </div>
 					  </div>
 					  <div className="mdl-card__actions mdl-card--border">
 					    <a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
@@ -28,9 +31,6 @@ var CarPark = React.createClass(
 					    </a>
 							<a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
 								Take me there
-							</a>
-							<a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
-								Spaces
 							</a>
 							<a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
 								UBER
