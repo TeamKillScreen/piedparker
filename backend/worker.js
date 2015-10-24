@@ -25,7 +25,7 @@ rootRef.on("child_added", function (snapshot) {
   
     policeService.getAllCrimeStatsAndAnalysis(location)
       .then(function (data) {
-        if (data.length) {
+        if (data) {
           eyes.inspect(data);
           
           locationRef.child("crime").set(data, function (error) {
@@ -33,6 +33,8 @@ rootRef.on("child_added", function (snapshot) {
               eyes.inspect(error);          
             }
           });
+        } else {
+          console.log("No data");
         }
       })
       .catch(function (error) {

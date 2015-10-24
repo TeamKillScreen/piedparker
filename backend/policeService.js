@@ -99,7 +99,7 @@ function getAllCrimeStats (location, distance) {
 function getAllCrimeStatsAndAnalysis (location, distance) {
 
   return new Promise(function (resolve, reject) {
-    var data = getAllCrimeStats(location, distance).then(function (data) {
+    getAllCrimeStats(location, distance).then(function (data) {
       var monthToForecast = "2015-10";
 
       var futureForecast = forecastCrimeNumbers(data, monthToForecast);
