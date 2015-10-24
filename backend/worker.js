@@ -2,6 +2,8 @@
 "use strict";
 
 /* global require */
+require('log-timestamp');
+
 /* global console */
 
 var eyes = require("eyes");
@@ -16,8 +18,12 @@ var rootRef = new Firebase(firebaseUrl);
 var parkingService = new ParkingService();
 var policeService = new PoliceService();
 
+console.log("Worker starting")
+
 function updateParking(location, snapshot)
 {
+  console.log("Updating Parking for " + snapshot.key() + ". {lat: " + location.lat + ", lon: " + location.lon + "}");
+
   parkingService.getParkingStats(location)
     .then(function (data) {
       if (data.length) {
@@ -37,6 +43,8 @@ function updateParking(location, snapshot)
 
 function updateCrimeData(location, snapshot)
 {
+  console.log("Updating Crime for " + snapshot.key() + ". {lat: " + location.lat + ", lon: " + location.lon + "}");
+
   policeService.getAllCrimeStatsAndAnalysis(location)
       .then(function (data) {
         if (data) {
@@ -73,7 +81,7 @@ rootRef.on("child_added", function (snapshot) {
 });
 
 setInterval(function (){
-  console.log("Updating Parking Data")
+  console.log("Scheduled Parking Data Update")
   rootRef.once("value",function(dataSnapshot) {
     dataSnapshot.forEach(function(childSnapshot) {
       var locationVal = childSnapshot.val();
