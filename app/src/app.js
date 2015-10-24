@@ -48,73 +48,7 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(157);
-
-	var CarPark = React.createClass({
-		displayName: 'CarPark',
-
-		render: function render() {
-			return React.createElement(
-				'div',
-				null,
-				React.createElement(
-					'div',
-					{ className: 'carpark-card-wide mdl-card mdl-shadow--2dp' },
-					React.createElement(
-						'div',
-						{ className: 'mdl-card__title' },
-						React.createElement(
-							'h1',
-							{ className: 'mdl-card__title-text' },
-							this.props.details.name
-						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'mdl-card__supporting-text' },
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...'
-					),
-					React.createElement(
-						'div',
-						{ className: 'mdl-card__actions mdl-card--border' },
-						React.createElement(
-							'a',
-							{ className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-							'Rating'
-						),
-						React.createElement(
-							'a',
-							{ className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-							'Take me there'
-						),
-						React.createElement(
-							'a',
-							{ className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-							'Spaces'
-						),
-						React.createElement(
-							'a',
-							{ className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-							'UBER'
-						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'mdl-card__menu' },
-						React.createElement(
-							'button',
-							{ className: 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect' },
-							React.createElement(
-								'i',
-								{ className: 'material-icons' },
-								'menu'
-							)
-						)
-					)
-				),
-				React.createElement('br', null)
-			);
-		}
-	});
+	var CarPark = __webpack_require__(158);
 
 	var Main = React.createClass({ displayName: 'test',
 		mixins: [ReactFireMixin],
@@ -19687,6 +19621,87 @@
 
 	module.exports = __webpack_require__(3);
 
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+			value: true
+	});
+	var React = __webpack_require__(1);
+
+	var CarPark = React.createClass({
+			displayName: "CarPark",
+
+			render: function render() {
+					return React.createElement(
+							"div",
+							null,
+							React.createElement(
+									"div",
+									{ className: "carpark-card-wide mdl-card mdl-shadow--2dp" },
+									React.createElement(
+											"div",
+											{ className: "mdl-card__title" },
+											React.createElement(
+													"h1",
+													{ className: "mdl-card__title-text" },
+													this.props.details.name
+											)
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__supporting-text" },
+											"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia..."
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__actions mdl-card--border" },
+											React.createElement(
+													"a",
+													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+													"Rating"
+											),
+											React.createElement(
+													"a",
+													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+													"Take me there"
+											),
+											React.createElement(
+													"a",
+													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+													"Spaces"
+											),
+											React.createElement(
+													"a",
+													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+													"UBER"
+											)
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__menu" },
+											React.createElement(
+													"button",
+													{ className: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" },
+													React.createElement(
+															"i",
+															{ className: "material-icons" },
+															"menu"
+													)
+											)
+									)
+							),
+							React.createElement("br", null)
+					);
+			}
+	});
+
+	exports["default"] = CarPark;
+	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);
