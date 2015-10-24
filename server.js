@@ -1,16 +1,44 @@
 /* global process */
-var express = require("express");
+
+// node_modules
 var cors = require("cors");
-var md5 = require("md5");
-var app = express();
+var express = require("express");
+var eyes = require("eyes");
 var Firebase = require("firebase");
+var md5 = require("md5");
 var port = process.env.PORT || 1337;
+
+// backend modules
+var PushoverService = require("./backend/PushoverService");
+
+// server starts here
+var app = express();
 
 app.use(express.static("app"));
 app.use(cors());
 
 app.get("/", function (req, res) {
   res.redirect("/index.html");
+});
+
+app.get("/api/launch/", function (req, res) {
+  var lat = req.query.lat;
+  var lon = req.query.lon;
+  
+  var pushoverService = new PushoverService();
+  
+  pushoverService.sendMessage({
+    location: {
+      lat: lat,
+      lon: lon
+    }
+  })
+  .then(function (response) {
+    eyes.inspect(response);
+  })
+  .catch(function (error) {
+    eyes.inspect(error);
+  });
 });
 
 app.get("/api/parking/", function (req, res) {
