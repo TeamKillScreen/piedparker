@@ -19660,7 +19660,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
-			value: true
+	  value: true
 	});
 	var React = __webpack_require__(1);
 
