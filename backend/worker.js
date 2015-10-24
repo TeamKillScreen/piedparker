@@ -41,16 +41,16 @@ function updateParking(location, snapshot)
     });
 }
 
-function updateCrimeData(location, snapshot)
+function updateCrimeData(location, snapshot, category)
 {
-  console.log("Updating Crime for " + snapshot.key() + ". {lat: " + location.lat + ", lon: " + location.lon + "}");
+  console.log("Updating " + category + " for " + snapshot.key() + ". {lat: " + location.lat + ", lon: " + location.lon + "}");
 
-  policeService.getAllCrimeStatsAndAnalysis(location)
+  policeService.getAllCrimeStatsAndAnalysis(location, 500, category)
       .then(function (data) {
         if (data) {
           //eyes.inspect(data);
           
-          snapshot.ref().child("crime").set(data, function (error) {
+          snapshot.ref().child(category.split("-")[1]).set(data, function (error) {
             if (error) {
               eyes.inspect(error);          
             }
@@ -71,7 +71,9 @@ rootRef.on("child_added", function (snapshot) {
     var locationRef = snapshot.ref(); 
     var location = locationVal.location;
   
-    updateCrimeData(location, snapshot);
+    updateCrimeData(location, snapshot, "vehicle-crime");
+
+    updateCrimeData(location, snapshot, "bicycle-theft");
   
     updateParking(location, snapshot);
   }

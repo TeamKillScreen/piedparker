@@ -58,13 +58,14 @@ app.get("/api/parking/", function (req, res) {
     {
       var geoCodeService = new GeoCodeService();
 
-      geoCodeService.getAddress(location).then(function (address) {
-        var location = { 
-            lat: lat,
-            lon: lon,
-            address: address
-        };
+      var location = { 
+          lat: lat,
+          lon: lon
+      };
 
+      geoCodeService.getAddress(location).then(function (address) {
+        location.address = address;
+        
         firebase.child("location").set(location);
       })
       .catch(function (error) {
