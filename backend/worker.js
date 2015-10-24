@@ -83,4 +83,4 @@ setInterval(function (){
       updateParking(location, childSnapshot);
     });
   });
-}, 5000);
+}, 15000);
