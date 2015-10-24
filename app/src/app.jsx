@@ -12,9 +12,18 @@ var CarPark = React.createClass(
 					    Mauris sagittis pellentesque lacus eleifend lacinia...
 					  </div>
 					  <div className="mdl-card__actions mdl-card--border">
-					    <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-					      Get Started
+					    <a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
+					      Rating
 					    </a>
+							<a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
+								Take me there
+							</a>
+							<a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
+								Spaces
+							</a>
+							<a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
+								UBER
+							</a>
 					  </div>
 					  <div className="mdl-card__menu">
 					    <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
