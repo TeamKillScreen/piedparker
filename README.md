@@ -4,7 +4,7 @@ Helping you park safer
 
 ## URL
 
-http://piedparker.azurewebsites.net/
+http://piedparkermcr.azurewebsites.net/
 
 ## Contributors
 
