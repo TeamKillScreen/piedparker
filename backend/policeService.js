@@ -54,11 +54,11 @@ function getCrimeStats(location, date, distance, category)
             longitude: crime.location.longitude
           };
        
-        var distance = geolib.getDistance(point1, point2);
+        var calculatedDistance = geolib.getDistance(point1, point2);
 
-        crime.location.distance = distance;
+        crime.location.distance = calculatedDistance;
 
-        return distance <= 500;
+        return calculatedDistance <= distance;
       });
 
       resolve({
@@ -112,7 +112,7 @@ function forecastCrimeNumbers (data, monthToPredict)
 
   _.each(data, function(dateResult)
   {
-    console.log(dateToXPoint(dateResult.date) + " => " + dateResult.crimes.length)
+    //console.log(dateToXPoint(dateResult.date) + " => " + dateResult.crimes.length)
 
     x.push(dateToXPoint(dateResult.date));
     y.push(dateResult.crimes.length);
@@ -124,6 +124,8 @@ function forecastCrimeNumbers (data, monthToPredict)
 
   return f(xPointOfPrediction); 
 }
+
+
 
 function PoliceService () {	
 }
