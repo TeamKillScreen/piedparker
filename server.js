@@ -11,16 +11,17 @@ app.get("/", function (req, res) {
   res.redirect("/index.html");
 });
 
-app.get("/api/parking/crime", function (req, res) {
+app.get("/api/parking/", function (req, res) {
   var lat = req.query.lat;
   var lon = req.query.lon;
 
-  var firebaseurl = "https://piedparker.firebaseio.com/parking/crime/" + md5(lat + ":" + lon);
+  var firebaseurl = "https://piedparker.firebaseio.com/locations/" + md5(lat + ":" + lon);
 
   var initFirebase = new Firebase(firebaseurl);
 
-  initFirebase.set({"request":{
+  initFirebase.set({"crime":{},"parking":{},
     "location":{"lat":lat, "lon":lon}
+  }
   }});
 
   res.json({"url":firebaseurl})
