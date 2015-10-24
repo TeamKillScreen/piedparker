@@ -1,4 +1,5 @@
-var React = require('../build/react');
+var React = require('react');
+var ReactDOM = require('react-dom')
 
 var CarPark = React.createClass(
   {
