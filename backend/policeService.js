@@ -69,8 +69,10 @@ function getCrimeStats(location, date, distance, category)
   });
 }
 
-function getAllCrimeStats (location, distance) {
+function getAllCrimeStats (location, distance, category) {
   distance = distance || 500;
+  category = category || "vehicle-crime";
+
   var policeService = new PoliceService();
   var promises = [];
 
@@ -90,16 +92,19 @@ function getAllCrimeStats (location, distance) {
   ];
 
   _.each(dates, function (date) {
-      promises.push(policeService.getCrimeStats(location, date, distance));
+      promises.push(policeService.getCrimeStats(location, date, distance, category));
   });
 
   return Promise.all(promises);
 }
 
-function getAllCrimeStatsAndAnalysis (location, distance) {
+function getAllCrimeStatsAndAnalysis (location, distance, category) {
+
+  distance = distance || 500;
+  category = category || "vehicle-crime";
 
   return new Promise(function (resolve, reject) {
-    getAllCrimeStats(location, distance).then(function (data) {
+    getAllCrimeStats(location, distance, category).then(function (data) {
       var monthToForecast = "2015-10";
 
       var futureForecast = forecastCrimeNumbers(data, monthToForecast);
