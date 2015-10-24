@@ -10,6 +10,7 @@ var port = process.env.PORT || 1337;
 
 // backend modules
 var PushoverService = require("./backend/PushoverService");
+var GeoCodeService = require("./backend/GeoCodeService");
 
 // server starts here
 var app = express();
@@ -55,12 +56,22 @@ app.get("/api/parking/", function (req, res) {
   firebase.once('value', function(dataSnapshot) {
     if(!dataSnapshot.hasChild("location"))
     {
-      firebase.set({ 
-        "location": {
+      var location = { 
           "lat": lat,
           "lon": lon
-        }
+      };
+
+      var geoCodeService = new GeoCodeService();
+
+      geoCodeService.reverseGeoCode(location).then(function (data) {
+        location.locationData = data;
+
+        firebase.child("location").set(location);
+      })
+      .catch(function (error) {
+        console.dir(error);
       });
+
     }
 
   });
