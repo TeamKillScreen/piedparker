@@ -3,7 +3,7 @@
 }
 
 .carpark-card-wide.mdl-card {
-  width: 480px;
+  <!--width: 480px;-->
 }
 .carpark-card-wide > .mdl-card__title {
   color: #fff;
