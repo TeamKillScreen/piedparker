@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/TeamKillScreen/piedparker#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "md5": "^2.0.0"
   }
 }

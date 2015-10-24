@@ -1,5 +1,6 @@
 /* global process */
 var express = require("express");
+var md5 = require("md5")
 var app = express();
 var port = process.env.PORT || 1337;
 
@@ -13,7 +14,9 @@ app.get("/api/parking/crime", function (req, res) {
   var lat = req.query.lat;
   var lon = req.query.lon;
 
-  res.json({"lat":lat, "lon":lon})
+  var firebaseurl = "https://piedparker.firebaseio.com/parking/crime/" + md5(lat + ":" + lon)
+
+  res.json({"url":firebaseurl})
 });
 
 var server = app.listen(port, function () {
