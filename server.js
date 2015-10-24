@@ -11,6 +11,10 @@ app.get("/", function (req, res) {
   res.redirect("/index.html");
 });
 
+app.get("/api/_parking/", function (req, res) {
+  
+});
+
 app.get("/api/parking/", function (req, res) {
   var lat = req.query.lat;
   var lon = req.query.lon;

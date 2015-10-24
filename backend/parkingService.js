@@ -5,8 +5,26 @@
 /* global process */
 /* global require */
 
+var _ = require("lodash");
 var Promise = require("Promise");
 var request = require("request");
+
+function mapper (carPark) {
+	return {
+		id: carPark.Id,
+		state: carPark.State,
+		name: carPark.Name,
+		lastUpdated: carPark.LastUpdated,
+		location: {
+			lat: carPark.Latitude,
+			lon: carPark.Longitude
+		},
+		capacity: carPark.Capacity,
+		spaces: carPark.SpacesNow,
+		spacesIn30Minutes: carPark.PredictedSpaces30Mins,
+		spacesIn60Minutes: carPark.PredictedSpaces60Mins
+	};
+}
 
 function getNearbyCarParks (location) {
 	return new Promise(function (resolve, reject) {
@@ -29,9 +47,9 @@ function getNearbyCarParks (location) {
 				longitude: location.lon
 			}
 		};
-		
+
 		var callback = function (error, response, data) {
-			if (error) {
+			if (error) {				
 				reject(error);
 				return;
 			}
@@ -41,7 +59,9 @@ function getNearbyCarParks (location) {
 				return;
 			}
 
-			resolve(data);
+			var json = JSON.parse(data);
+
+			resolve(_.map(json, mapper));
 		};
 		
 		request(options, callback);		
