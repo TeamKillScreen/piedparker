@@ -19713,19 +19713,29 @@
 							React.createElement(
 									'div',
 									{ className: 'carpark-card-wide mdl-card mdl-shadow--2dp' },
-									React.createElement(
-											'div',
-											{ style: backgroundStyle, className: 'mdl-card__title' },
-											React.createElement(
-													'h1',
-													{ className: 'mdl-card__title-text' },
-													this.props.details.name
-											)
-									),
+									React.createElement('div', { style: backgroundStyle, className: 'mdl-card__title' }),
 									React.createElement(
 											'div',
 											{ className: 'mdl-card__supporting-text' },
-											'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...'
+											React.createElement(
+													'div',
+													{ className: 'carpark-title' },
+													React.createElement(
+															'h1',
+															{ className: 'mdl-card__title-text' },
+															this.props.details.name
+													)
+											),
+											React.createElement(
+													'div',
+													{ className: 'carpark-spaces' },
+													React.createElement(
+															'h1',
+															{ className: 'mdl-card__title-text' },
+															'Spaces:',
+															this.props.details.spaces
+													)
+											)
 									),
 									React.createElement(
 											'div',
@@ -19739,11 +19749,6 @@
 													'a',
 													{ className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
 													'Take me there'
-											),
-											React.createElement(
-													'a',
-													{ className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-													'Spaces'
 											),
 											React.createElement(
 													'a',
