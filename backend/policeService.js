@@ -15,13 +15,14 @@ function mapper (crime) {
   return crime;
 }
 
-function getCrimeStats(location, date, distance)
+function getCrimeStats(location, date, distance, category)
 {
   return new Promise(function (resolve, reject) {
     distance = distance || 500;
+    category = category || "vehicle-crime";
     
     var options = {
-      uri: "https://data.police.uk/api/crimes-street/vehicle-crime",
+      uri: "https://data.police.uk/api/crimes-street/" + category,
       qs: {
         lat: location.lat,
         lng: location.lon,
@@ -110,7 +111,7 @@ function computeAverageRisk (data, monthToPredict)
   _.each(data, function(dateResult)
   {
     console.log(dateToXPoint(dateResult.date) + " => " + dateResult.crimes.length)
-
+    
     x.push(dateToXPoint(dateResult.date));
     y.push(dateResult.crimes.length);
   });
