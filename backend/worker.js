@@ -23,7 +23,7 @@ rootRef.on("child_added", function (snapshot) {
     var locationRef = snapshot.ref(); 
     var location = locationVal.location;
   
-    policeService.getAllCrimeStats(location)
+    policeService.getAllCrimeStatsAndAnalysis(location)
       .then(function (data) {
         if (data.length) {
           eyes.inspect(data);
