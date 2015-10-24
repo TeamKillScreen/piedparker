@@ -11,6 +11,47 @@ var Promise = require("Promise");
 var request = require("request");
 var util = require("util");
 
+function getAddress (location) {
+  return new Promise(function (resolve, reject) {
+    var urlFormat = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&latlng=%d,%d";
+    var url = util.format(urlFormat, location.lat, location.lon);
+
+    var options = {
+        url: url
+    };
+
+    eyes.inspect(options);    
+
+    request(options, function (error, response, data) {
+      if (error) {
+        reject(error);
+        return;
+      }
+
+      if (response.statusCode !== 200) {
+        reject(response.statusCode);
+        return;
+      }
+
+      var result = JSON.parse(data);
+
+      // eyes.inspect(result);
+      
+      // TODO: clean up.
+      if (!result.results || !result.results.length) {
+        reject("No results.");
+        return;                      
+      }
+      
+      var firstResult = result.results[0];
+      
+      resolve({
+        formattedAddress: firstResult.formatted_address
+      });
+    });
+  });   
+}
+
 function reverseGeoCode (location) {
     return new Promise(function (resolve, reject) {
         var headers = {
@@ -29,7 +70,7 @@ function reverseGeoCode (location) {
             }
         };
         
-        eyes.inspect(options);    
+        // eyes.inspect(options);    
         
         request(options, function (error, response, data) {
             if (error) {
@@ -61,5 +102,6 @@ function GeoCodeService () {
 }
 
 GeoCodeService.prototype.reverseGeoCode = reverseGeoCode;
+GeoCodeService.prototype.getAddress = getAddress;
 
 module.exports = GeoCodeService;

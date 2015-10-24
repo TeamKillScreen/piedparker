@@ -54,18 +54,18 @@ app.get("/api/parking/", function (req, res) {
 
 
   firebase.once('value', function(dataSnapshot) {
-    if(!dataSnapshot.hasChild("location"))
+    if (!dataSnapshot.hasChild("location"))
     {
-      var location = { 
-          "lat": lat,
-          "lon": lon
-      };
-
       var geoCodeService = new GeoCodeService();
 
-      geoCodeService.reverseGeoCode(location).then(function (data) {
-        location.locationData = data;
+      var location = { 
+          lat: lat,
+          lon: lon
+      };
 
+      geoCodeService.getAddress(location).then(function (address) {
+        location.address = address;
+        
         firebase.child("location").set(location);
       })
       .catch(function (error) {

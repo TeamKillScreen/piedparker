@@ -8,6 +8,15 @@ var location = {
 
 var geoCodeService = new GeoCodeService();
 
+geoCodeService.getAddress(location)
+	.then(function (data) {
+		eyes.inspect(data);
+	})
+	.catch(function (error) {
+		console.dir(error);
+	});
+
+/*
 geoCodeService.reverseGeoCode(location)
 	.then(function (data) {
 		eyes.inspect(data);
@@ -15,3 +24,4 @@ geoCodeService.reverseGeoCode(location)
 	.catch(function (error) {
 		console.dir(error);
 	});
+*/
