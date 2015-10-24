@@ -21,15 +21,16 @@ app.get("/api/parking/", function (req, res) {
   var firebaseLocationUrl = "https://piedparker.firebaseio.com/locations/" + hash;
   var firebase = new Firebase(firebaseLocationUrl);
 
-  firebase.set({ 
-    "crime": {},
-    "parking": {},
-    "location": {
-      "lat": lat,
-      "lon": lon
-    }
-  });
-  
+  if(!firebase.haschild("location"))
+  {
+    firebase.set({ 
+      "location": {
+        "lat": lat,
+        "lon": lon
+      }
+    });
+  }
+
   res.json({
     "url": firebaseLocationUrl
   });
