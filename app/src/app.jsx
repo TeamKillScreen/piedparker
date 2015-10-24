@@ -1,6 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom')
 var CarPark = require('./carpark.jsx')
+var Crime = require('./crime.jsx')
+var Map = require('./map.jsx')
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -24,16 +26,23 @@ var Main = React.createClass({displayName: 'Main',
 	},
 	componentWillMount: function() {
 		var component = this;
+		
+		var binding = function(url) {
+				var firebaseParkingRef = new Firebase(url + "/parking");
+				component.bindAsArray(firebaseParkingRef.limitToLast(25), 'parking');
+				
+				var firebaseCrimeRef = new Firebase(url + "/crime");
+				component.bindAsArray(firebaseCrimeRef.limitToLast(25), 'crime');
+				
+				component.setState({fireBaseUrl: url});
+			};
+		
 		if (component.state.mode == 'test') {
-			var firebaseRef = new Firebase('https://piedparker.firebaseio.com/test' + "/parking");
-				component.bindAsArray(firebaseRef.limitToLast(25), 'parking');
-				component.setState({fireBaseUrl: 'https://piedparker.firebaseio.com/test'});
+			binding('https://piedparker.firebaseio.com/test');
 		}
 		else {
 			$.get("https://piedparker2015.azurewebsites.net/api/parking/?lat=" + component.state.lat + "&lon=" + component.state.lon, function(data) {
-				var firebaseRef = new Firebase(data.url + "/parking");
-				component.bindAsArray(firebaseRef.limitToLast(25), 'parking');
-				component.setState({fireBaseUrl: data.url});
+				binding(data.url);
 			});
 		}
 	},
@@ -45,6 +54,8 @@ var Main = React.createClass({displayName: 'Main',
 		});
 		return (
 			<div>
+				<Crime details={this.state.crime} />
+				<Map details={this.state.parking} />
 				{carparks}
 			</div>
 		);

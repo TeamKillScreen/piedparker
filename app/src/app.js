@@ -49,6 +49,8 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(157);
 	var CarPark = __webpack_require__(158);
+	var Crime = __webpack_require__(160);
+	var Map = __webpack_require__(159);
 
 	function getParameterByName(name) {
 		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -72,15 +74,22 @@
 		},
 		componentWillMount: function componentWillMount() {
 			var component = this;
+
+			var binding = function binding(url) {
+				var firebaseParkingRef = new Firebase(url + "/parking");
+				component.bindAsArray(firebaseParkingRef.limitToLast(25), 'parking');
+
+				var firebaseCrimeRef = new Firebase(url + "/crime");
+				component.bindAsArray(firebaseCrimeRef.limitToLast(25), 'crime');
+
+				component.setState({ fireBaseUrl: url });
+			};
+
 			if (component.state.mode == 'test') {
-				var firebaseRef = new Firebase('https://piedparker.firebaseio.com/test' + "/parking");
-				component.bindAsArray(firebaseRef.limitToLast(25), 'parking');
-				component.setState({ fireBaseUrl: 'https://piedparker.firebaseio.com/test' });
+				binding('https://piedparker.firebaseio.com/test');
 			} else {
 				$.get("https://piedparker2015.azurewebsites.net/api/parking/?lat=" + component.state.lat + "&lon=" + component.state.lon, function (data) {
-					var firebaseRef = new Firebase(data.url + "/parking");
-					component.bindAsArray(firebaseRef.limitToLast(25), 'parking');
-					component.setState({ fireBaseUrl: data.url });
+					binding(data.url);
 				});
 			}
 		},
@@ -91,6 +100,8 @@
 			return React.createElement(
 				'div',
 				null,
+				React.createElement(Crime, { details: this.state.crime }),
+				React.createElement(Map, { details: this.state.parking }),
 				carparks
 			);
 		}
@@ -19724,6 +19735,148 @@
 	});
 
 	exports["default"] = CarPark;
+	module.exports = exports["default"];
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+			value: true
+	});
+	var React = __webpack_require__(1);
+
+	var Map = React.createClass({
+			displayName: "Map",
+
+			render: function render() {
+					return React.createElement(
+							"div",
+							null,
+							React.createElement(
+									"div",
+									{ className: "carparkmap-card-wide mdl-card mdl-shadow--2dp" },
+									React.createElement(
+											"div",
+											{ className: "mdl-card__title" },
+											React.createElement(
+													"h1",
+													{ className: "mdl-card__title-text" },
+													"Car Park Map"
+											)
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__supporting-text" },
+											"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia..."
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__actions mdl-card--border" },
+											React.createElement(
+													"a",
+													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+													"Rating"
+											),
+											React.createElement(
+													"a",
+													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+													"A button"
+											)
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__menu" },
+											React.createElement(
+													"button",
+													{ className: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" },
+													React.createElement(
+															"i",
+															{ className: "material-icons" },
+															"menu"
+													)
+											)
+									)
+							),
+							React.createElement("br", null)
+					);
+			}
+	});
+
+	exports["default"] = Map;
+	module.exports = exports["default"];
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+			value: true
+	});
+	var React = __webpack_require__(1);
+
+	var Crime = React.createClass({
+			displayName: "Crime",
+
+			render: function render() {
+					return React.createElement(
+							"div",
+							null,
+							React.createElement(
+									"div",
+									{ className: "crime-card-wide mdl-card mdl-shadow--2dp" },
+									React.createElement(
+											"div",
+											{ className: "mdl-card__title" },
+											React.createElement(
+													"h1",
+													{ className: "mdl-card__title-text" },
+													"Crime Stats"
+											)
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__supporting-text" },
+											"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia..."
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__actions mdl-card--border" },
+											React.createElement(
+													"a",
+													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+													"Rating"
+											),
+											React.createElement(
+													"a",
+													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+													"A button"
+											)
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__menu" },
+											React.createElement(
+													"button",
+													{ className: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" },
+													React.createElement(
+															"i",
+															{ className: "material-icons" },
+															"menu"
+													)
+											)
+									)
+							),
+							React.createElement("br", null)
+					);
+			}
+	});
+
+	exports["default"] = Crime;
 	module.exports = exports["default"];
 
 /***/ }
