@@ -26,7 +26,7 @@ function mapper (carPark) {
 	};
 }
 
-function getNearbyCarParks (location) {
+function getParkingStats (location) {
 	return new Promise(function (resolve, reject) {
 		var devkey = process.env.TFGM_API_DEVKEY;
 		var appkey = process.env.TFGM_API_APPKEY;
@@ -71,6 +71,6 @@ function getNearbyCarParks (location) {
 function ParkingService () {	
 }
 
-ParkingService.prototype.getNearbyCarParks = getNearbyCarParks;
+ParkingService.prototype.getParkingStats = getParkingStats;
 
 module.exports = ParkingService;

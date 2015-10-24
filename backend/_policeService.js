@@ -1,4 +1,4 @@
-var ParkingService = require("./parkingService");
+var PoliceService = require("./policeService");
 var eyes = require("eyes");
 
 var location = {
@@ -6,9 +6,9 @@ var location = {
 	lon: -2.2400	
 };
 
-var parkingService = new ParkingService();
+var policeService = new PoliceService();
 
-parkingService.getParkingStats(location)
+policeService.getCrimeStats(location, "2015-08")
 	.then(function (data) {
 		eyes.inspect(data);		
 	})
