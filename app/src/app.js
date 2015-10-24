@@ -72,7 +72,7 @@
 			var component = this;
 			$.get("https://piedparker2015.azurewebsites.net/api/parking/?lat=" + component.state.lat + "&lon=" + component.state.lon, function (data) {
 				var firebaseRef = new Firebase(data.url + "/parking");
-				this.bindAsArray(firebaseRef.limitToLast(25), 'parking');
+				component.bindAsArray(firebaseRef.limitToLast(25), 'parking');
 			});
 		},
 		render: function render() {
