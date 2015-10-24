@@ -90,7 +90,9 @@ function getAllCrimeStats (location, distance) {
   ];
 
   _.each(dates, function (date) {
-    promises.push(policeService.getCrimeStats(location, date, distance));
+    setTimeout(function() {
+      promises.push(policeService.getCrimeStats(location, date, distance))
+    }, 100);
   });
 
   return Promise.all(promises);
