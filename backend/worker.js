@@ -18,7 +18,7 @@ var rootRef = new Firebase(firebaseUrl);
 var parkingService = new ParkingService();
 var policeService = new PoliceService();
 
-console.log("Worker starting")
+console.log("Worker starting");
 
 function updateParking(location, snapshot)
 {
@@ -81,7 +81,7 @@ rootRef.on("child_added", function (snapshot) {
 });
 
 setInterval(function (){
-  console.log("Scheduled Parking Data Update")
+  console.log("Scheduled Parking Data Update");
   rootRef.once("value",function(dataSnapshot) {
     dataSnapshot.forEach(function(childSnapshot) {
       var locationVal = childSnapshot.val();

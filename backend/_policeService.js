@@ -19,19 +19,19 @@ policeService.getCrimeStats(location, "2015-08", 250)
 policeService.getAllCrimeStats(location, 250)
 	.then(function (data) {
 
-    var forceastForOct = policeService.forecastCrimeNumbers(data, "2015-10")
+    var forceastForOct = policeService.forecastCrimeNumbers(data, "2015-10");
 
-    console.log("Risk based on forceast: ")
+    console.log("Risk based on forceast: ");
 		console.log(policeService.calculateRisk(forceastForOct));
 
-    var highestMonth = policeService.findHighestMonth(data)
+    var highestMonth = policeService.findHighestMonth(data);
 
-    console.log("Risk based on Highest Month: " + highestMonth.month)
+    console.log("Risk based on Highest Month: " + highestMonth.month);
     console.log(policeService.calculateRisk(highestMonth.numberOfCrimes));
 
-    var currentMonth = policeService.crimesInLatestMonth(data)
+    var currentMonth = policeService.crimesInLatestMonth(data);
 
-    console.log("Risk based on Current Month: " + currentMonth.month)
+    console.log("Risk based on Current Month: " + currentMonth.month);
     console.log(policeService.calculateRisk(currentMonth.numberOfCrimes));
 
 	})
