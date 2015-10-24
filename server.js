@@ -2,6 +2,7 @@
 var express = require("express");
 var md5 = require("md5")
 var app = express();
+var Firebase = require("firebase");
 var port = process.env.PORT || 1337;
 
 app.use(express.static("app"));
@@ -14,7 +15,13 @@ app.get("/api/parking/crime", function (req, res) {
   var lat = req.query.lat;
   var lon = req.query.lon;
 
-  var firebaseurl = "https://piedparker.firebaseio.com/parking/crime/" + md5(lat + ":" + lon)
+  var firebaseurl = "https://piedparker.firebaseio.com/parking/crime/" + md5(lat + ":" + lon);
+
+  var initFirebase = new Firebase(firebaseurl);
+
+  initFirebase.set({"request":{
+    "location":{"lat":lat, "lon":lon}
+  }});
 
   res.json({"url":firebaseurl})
 });
