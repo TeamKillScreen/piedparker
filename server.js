@@ -34,10 +34,12 @@ app.get("/api/launch/", function (req, res) {
     }
   })
   .then(function (response) {
-    eyes.inspect(response);
+    res.json(response);
   })
   .catch(function (error) {
-    eyes.inspect(error);
+    res.json({
+      error: error
+    });
   });
 });
 

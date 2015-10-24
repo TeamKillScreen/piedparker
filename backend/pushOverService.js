@@ -28,9 +28,9 @@ function sendMessage (payload) {
         title: "Pied Parker",
         token: process.env.PUSHOVER_APPKEY,
         user: process.env.PUSHOVER_USERKEY,
-        message: "Something wonderful happened.",
+        message: "Check your parking spot.",
         url: url,
-        url_title: "Launch the Pied Piper app",
+        url_title: "Launch the Pied Parker app",
         priority: 1,
         sound: "siren"		  
       }
