@@ -15,3 +15,11 @@ policeService.getCrimeStats(location, "2015-08")
 	.catch(function (error) {
 		console.dir(error);
 	});
+
+policeService.getAllCrimeStats(location)
+	.then(function (data) {
+		eyes.inspect(data);
+	})
+	.catch(function (error) {
+		console.dir(error);
+	});

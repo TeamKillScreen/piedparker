@@ -10,7 +10,11 @@ var geolib = require("geolib");
 var Promise = require("Promise");
 var request = require("request");
 
-function getCrimeStats(location, monthKey, distance)
+function mapper (crime) {
+  return crime;
+}
+
+function getCrimeStats(location, date, distance)
 {
   return new Promise(function (resolve, reject) {
     distance = distance || 500;
@@ -20,7 +24,7 @@ function getCrimeStats(location, monthKey, distance)
       qs: {
         lat: location.lat,
         lng: location.lon,
-        date: monthKey
+        date: date
       }
     };
     
@@ -53,14 +57,38 @@ function getCrimeStats(location, monthKey, distance)
         return distance <= 500;
       });
 
-      resolve(nearbyCrimes);
+      resolve({
+        date: date,
+        crimes: _.map(nearbyCrimes, mapper)
+      });
     });
   });
+}
+
+function getAllCrimeStats (location) {
+  var policeService = new PoliceService();
+  var promises = [];
+
+  var dates = [
+    "2015-08",
+    "2015-07",
+    "2015-06",
+    "2015-05",
+    "2015-04",
+    "2015-03"
+  ];
+
+  _.each(dates, function (date) {
+    promises.push(policeService.getCrimeStats(location, date));
+  });
+
+  return Promise.all(promises);
 }
 
 function PoliceService () {	
 }
 
 PoliceService.prototype.getCrimeStats = getCrimeStats;
+PoliceService.prototype.getAllCrimeStats = getAllCrimeStats;
 
 module.exports = PoliceService;
