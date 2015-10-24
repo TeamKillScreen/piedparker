@@ -12,7 +12,7 @@ var request = require("request");
 var util = require("util");
 
 function reverseGeoCode (location) {
-	return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
         var headers = {
             "content-type": "application/x-www-form-urlencoded"
         };
@@ -44,16 +44,17 @@ function reverseGeoCode (location) {
 
             var result = JSON.parse(data).result;
 
-            eyes.inspect(result);
+            // eyes.inspect(result);
     
-            if (!result.length) {
-                reject("No result.");
+            // TODO: clean up.
+            if (!result.length || !result[0].result || !result[0].result.length) {
+                reject("No results.");
                 return;            
             }
             
-            resolve(result[0]);
+            resolve(result[0].result[0]);
         });
-	});
+    });
 }
 
 function GeoCodeService () {	
