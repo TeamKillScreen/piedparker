@@ -9,6 +9,13 @@ app.get("/", function (req, res) {
   res.redirect("/index.html");
 });
 
+app.get("/api/parking/crime", function (req, res) {
+  var lat = req.query.lat;
+  var lon = req.query.lon;
+
+  res.json({"lat":lat, "lon":lon})
+});
+
 var server = app.listen(port, function () {
   console.log("Serving on port %d", port);
 });
