@@ -48,7 +48,7 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(157);
-	var CarPark = __webpack_require__(158);
+	var CarParks = __webpack_require__(161);
 	var Crime = __webpack_require__(160);
 	var Map = __webpack_require__(159);
 
@@ -94,15 +94,12 @@
 			}
 		},
 		render: function render() {
-			var carparks = this.state.parking.map(function (carpark, index) {
-				return React.createElement(CarPark, { key: index, details: carpark });
-			});
 			return React.createElement(
 				'div',
 				null,
 				React.createElement(Crime, { details: this.state.crime }),
 				React.createElement(Map, { details: this.state.parking }),
-				carparks
+				React.createElement(CarParks, { details: this.state.parking })
 			);
 		}
 	});
@@ -19878,6 +19875,36 @@
 
 	exports["default"] = Crime;
 	module.exports = exports["default"];
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+			value: true
+	});
+	var React = __webpack_require__(1);
+	var CarPark = __webpack_require__(158);
+
+	var CarParks = React.createClass({
+			displayName: 'CarParks',
+
+			render: function render() {
+					var carparks = this.props.details.map(function (carpark, index) {
+							return React.createElement(CarPark, { key: index, details: carpark });
+					});
+					return React.createElement(
+							'div',
+							null,
+							carparks
+					);
+			}
+	});
+
+	exports['default'] = CarParks;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

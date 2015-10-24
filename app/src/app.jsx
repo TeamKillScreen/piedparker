@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom')
-var CarPark = require('./carpark.jsx')
+var CarParks = require('./carparks.jsx')
 var Crime = require('./crime.jsx')
 var Map = require('./map.jsx')
 
@@ -47,16 +47,11 @@ var Main = React.createClass({displayName: 'Main',
 		}
 	},
 	render: function() {
-		var carparks = this.state.parking.map(function(carpark, index) {
-			return (
-				<CarPark key={index} details={carpark} />
-			)
-		});
 		return (
 			<div>
 				<Crime details={this.state.crime} />
 				<Map details={this.state.parking} />
-				{carparks}
+				<CarParks details={this.state.parking} />
 			</div>
 		);
 	}
