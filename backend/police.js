@@ -1,15 +1,24 @@
 var Firebase = require("firebase");
-var eyes = require("eyes")
+var eyes = require("eyes");
 var request = require('request');
+var geolib = require('geolib');
 
 function GetCrimeStats(lat, lon, monthKey, firebaseURL)
 { 
-  request({uri: 'https://data.police.uk/api/crimes-street/all-crime?lat='+lat+'&lng='+lon+'&date='+monthKey, method: "GET"},
+  request({uri: 'https://data.police.uk/api/crimes-street/vehicle-crime?lat='+lat+'&lng='+lon+'&date='+monthKey, method: "GET"},
             function (error, response, body) {
               if (!error && response.statusCode == 200) {
                 var outputFirebase = new Firebase(firebaseURL + monthKey);
 
-                outputFirebase.set(JSON.parse(body));
+                var crimes = JSON.parse(body);
+
+                var arrayFound = crimes.filter(function(item) {
+                    var distance = geolib.getDistance({latitude: lat, longitude: lon}, {latitude: item.location.latitude, longitude: item.location.longitude});
+                    console.log(distance);
+                  return distance <= 500;
+                  });
+
+                outputFirebase.set(arrayFound);
             }});
 }
 
