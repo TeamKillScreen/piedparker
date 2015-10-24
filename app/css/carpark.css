@@ -1,0 +1,11 @@
+.carpark-card-wide.mdl-card {
+  width: 480px;
+}
+.carpark-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 160px;
+  background: url('https://maps.googleapis.com/maps/api/streetview?size=480x160&location=53.4767278455969,-2.24934622751422&key=AIzaSyAckgB0_dFK2D1ERLQC2LVC0jpwsM5gjDY') center / cover;
+}
+.carpark-card-wide > .mdl-card__menu {
+  color: #fff;
+}
