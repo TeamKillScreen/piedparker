@@ -90,9 +90,7 @@ function getAllCrimeStats (location, distance) {
   ];
 
   _.each(dates, function (date) {
-    setTimeout(function() {
       promises.push(policeService.getCrimeStats(location, date, distance))
-    }, 100);
   });
 
   return Promise.all(promises);
@@ -184,7 +182,7 @@ function forecastCrimeNumbers(data, monthToPredict)
 
   var xPointOfPrediction = dateToXPoint(monthToPredict);
 
-  return f(xPointOfPrediction);
+  return Math.round(f(xPointOfPrediction));
 }
 
 function findHighestMonth(data)
