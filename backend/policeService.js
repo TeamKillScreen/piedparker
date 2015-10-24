@@ -103,7 +103,7 @@ function dateToXPoint(date)
   return (arr[0] * 12) + (arr[1] * 1);
 }
 
-function computeAverageRisk (data, monthToPredict)
+function forecastCrimeNumbers (data, monthToPredict)
 {
   monthToPredict = monthToPredict || "2015-10";
 
@@ -130,6 +130,6 @@ function PoliceService () {
 
 PoliceService.prototype.getCrimeStats = getCrimeStats;
 PoliceService.prototype.getAllCrimeStats = getAllCrimeStats;
-PoliceService.prototype.computeAverageRisk = computeAverageRisk;
+PoliceService.prototype.forecastCrimeNumbers = forecastCrimeNumbers;
 
 module.exports = PoliceService;

@@ -18,7 +18,7 @@ policeService.getCrimeStats(location, "2015-08")
 
 policeService.getAllCrimeStats(location)
 	.then(function (data) {
-		console.log(policeService.computeAverageRisk(data, "2015-10"));
+		console.log(policeService.forecastCrimeNumbers(data, "2015-10"));
 	})
 	.catch(function (error) {
 		console.dir(error);
