@@ -52,7 +52,7 @@ function updateCrimeData(location, snapshot, category)
           
           snapshot.ref().child(category.split("-")[1]).set(data, function (error) {
             if (error) {
-              eyes.inspect(error);          
+              eyes.inspect(error);
             }
           });
         } else {
