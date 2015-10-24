@@ -1,7 +1,14 @@
-var http = require('http')
+/* global process */
+var express = require("express");
+var app = express();
 var port = process.env.PORT || 1337;
-http.createServer(function(req, res) {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello World\n');
-}).listen(port);
 
+app.use(express.static("app"));
+
+app.get("/", function (req, res) {
+  res.redirect("/index.html");
+});
+
+var server = app.listen(port, function () {
+  console.log("Serving on port %d", port);
+});
