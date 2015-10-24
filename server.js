@@ -1,11 +1,13 @@
 /* global process */
 var express = require("express");
+var cors = require("cors");
 var md5 = require("md5");
 var app = express();
 var Firebase = require("firebase");
 var port = process.env.PORT || 1337;
 
 app.use(express.static("app"));
+app.use(cors());
 
 app.get("/", function (req, res) {
   res.redirect("/index.html");

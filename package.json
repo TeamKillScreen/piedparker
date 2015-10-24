@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/TeamKillScreen/piedparker#readme",
   "dependencies": {
+    "cors": "^2.7.1",
     "express": "^4.13.3",
     "eyes": "^0.1.8",
     "firebase": "^2.3.1",
