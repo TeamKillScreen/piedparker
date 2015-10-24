@@ -48,7 +48,7 @@ function getCrimeStats(location, monthKey, distance)
             longitude: crime.location.longitude
           };
        
-        // var distance = geolib.getDistance(point1, point2);
+        var distance = geolib.getDistance(point1, point2);
 
         return distance <= 500;
       });
