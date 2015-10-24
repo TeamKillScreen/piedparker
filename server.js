@@ -21,16 +21,21 @@ app.get("/api/parking/", function (req, res) {
   var firebaseLocationUrl = "https://piedparker.firebaseio.com/locations/" + hash;
   var firebase = new Firebase(firebaseLocationUrl);
 
-  if(!firebase.haschild("location"))
-  {
-    firebase.set({ 
-      "location": {
-        "lat": lat,
-        "lon": lon
-      }
-    });
-  }
 
+  firebase.once('value', function(dataSnapshot) {
+    if(!dataSnapshot.hasChild("location"))
+    {
+      firebase.set({ 
+        "location": {
+          "lat": lat,
+          "lon": lon
+        }
+      });
+    }
+
+  });
+
+  
   res.json({
     "url": firebaseLocationUrl
   });
