@@ -65,7 +65,6 @@
 			var lon = getParameterByName('lon');
 			var lat = getParameterByName('lat');
 			var mode = getParameterByName('mode');
-			var mode2 = getParameterByName('mode');
 
 			return {
 				parking: [],
