@@ -19832,21 +19832,6 @@
 		displayName: 'Crime',
 
 		render: function render() {
-			var lat = this.props.lat;
-			var lon = this.props.lon;
-			var backUrl = 'https://maps.googleapis.com/maps/api/streetview?size=480x160&location=' + lat + ',' + lon + '&key=AIzaSyAckgB0_dFK2D1ERLQC2LVC0jpwsM5gjDY';
-			var backgroundStyle = {
-				color: '#fff',
-				height: '160px',
-				background: 'url(' + backUrl + ') center / cover'
-			};
-
-			var locationAddress = _.first(_.where(this.props.location, { ".key": "address" }));
-			var address = "";
-			if (locationAddress !== undefined) {
-				var address = locationAddress.formattedAddress;
-			}
-
 			var content;
 			var risk = _.first(_.where(this.props.details, { ".key": "risk" }));
 			if (risk !== undefined) {
@@ -19887,21 +19872,21 @@
 							'Crime Stats'
 						)
 					),
+					content,
 					React.createElement(
 						'div',
-						null,
-						React.createElement('div', { style: backgroundStyle, className: 'mdl-card__title' }),
+						{ className: 'mdl-card__actions mdl-card--border' },
 						React.createElement(
-							'div',
-							{ className: 'mdl-card__supporting-text' },
-							React.createElement(
-								'h1',
-								{ className: 'mdl-card__title-text' },
-								address
-							)
+							'a',
+							{ className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
+							'Rating'
+						),
+						React.createElement(
+							'a',
+							{ className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
+							'A button'
 						)
 					),
-					content,
 					React.createElement(
 						'div',
 						{ className: 'mdl-card__menu' },
