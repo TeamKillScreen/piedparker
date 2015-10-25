@@ -54,7 +54,7 @@ var Main = React.createClass({displayName: 'Main',
 		return (
 			<div>
 				<Crime details={this.state.crime} lon={this.state.lon} lat={this.state.lat} location={this.state.location} />
-				<Map details={this.state.parking} />
+				<Map details={this.state.parking} lon={this.state.lon} lat={this.state.lat} />
 				<CarParks details={this.state.parking} total={this.state.parking.length} />
 			</div>
 		);
