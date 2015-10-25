@@ -52,9 +52,6 @@ var CarPark = React.createClass(
               <a id="dirs" href={this.getDirectionsUrl(lat, lon)} target="_blank" title="Directions to this location" className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
 								<i className="material-icons">directions</i>
 							</a>
-              <a id="uber" title="Uber from this location" style={{margin:'0 0 0 10px'}} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
-								<i className="material-icons">local_taxi</i>
-							</a>
               <a id="uber" title="Park Mark Approved" style={parkMarkStyle} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
 								<i className="material-icons">{riskIcon}</i>
 							</a>
