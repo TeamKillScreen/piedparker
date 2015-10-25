@@ -194,7 +194,12 @@ function forecastCrimeNumbers(data, monthToPredict)
 
   var xPointOfPrediction = dateToXPoint(monthToPredict);
 
-  return Math.round(f(xPointOfPrediction));
+  var prediction = Math.round(f(xPointOfPrediction));
+
+  if (prediction < 0)
+    return 0;
+
+  return prediction;
 }
 
 function findHighestMonth(data)
