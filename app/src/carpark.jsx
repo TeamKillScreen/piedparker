@@ -52,7 +52,7 @@ var CarPark = React.createClass(
 								<i className="material-icons">local_taxi</i>
 							</a>
               <a id="uber" title="Park Mark Approved" style={parkMarkStyle} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
-								<i className="material-icons">{hasParkMark == 'true' ? 'verified_user' : 'warning'}</i>
+								<i className="material-icons">{hasParkMark ? 'verified_user' : 'warning'}</i>
 							</a>
 					  </div>
 					  <div className="mdl-card__menu">

@@ -19844,7 +19844,7 @@
 	            React.createElement(
 	              'i',
 	              { className: 'material-icons' },
-	              hasParkMark == 'true' ? 'verified_user' : 'warning'
+	              hasParkMark ? 'verified_user' : 'warning'
 	            )
 	          )
 	        ),
