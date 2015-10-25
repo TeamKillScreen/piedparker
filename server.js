@@ -51,8 +51,10 @@ app.get("/api/parking/", function (req, res) {
   var splitLat = lat.split(".");
   var splitLon = lon.split(".");
 
-  lat = splitLat[0] + "." + splitLat[1].substring(0, splitLat[1].length < 5 ? splitLat[1].length : 5);
-  lon = splitLon[0] + "." + splitLon[1].substring(0, splitLon[1].length < 5 ? splitLon[1].length : 5);
+  var maxDecimalPoints = 4
+
+  lat = splitLat[0] + "." + splitLat[1].substring(0, splitLat[1].length < maxDecimalPoints ? splitLat[1].length : maxDecimalPoints);
+  lon = splitLon[0] + "." + splitLon[1].substring(0, splitLon[1].length < maxDecimalPoints ? splitLon[1].length : maxDecimalPoints);
   
   var hash = md5(lat + ":" + lon);
 
