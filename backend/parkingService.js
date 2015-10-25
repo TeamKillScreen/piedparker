@@ -9,6 +9,45 @@ var _ = require("lodash");
 var eyes = require("eyes");
 var Promise = require("Promise");
 var request = require("request");
+var parseString = require('xml2js').parseString;
+
+function getParkMarkCarParks(location)
+{
+	return new Promise(function (resolve, reject) {
+		var jar = request.jar();
+
+	  var options = {	uri: 'http://www.parkmark.co.uk/car-park-finder',
+				            jar: jar, 
+				            method: "GET"
+				          };
+
+		request(options, function (error, response, body) {
+    	if (!error && response.statusCode == 200) {
+    		var innerOptions = {  uri: 'http://www.parkmark.co.uk/storesLocatorHandler.ashx?latitude=' + location.lat + '&longitude=' + location.lon,
+						                  jar: jar,
+						                  method: "GET",
+						                  headers: {"Referer": "http://www.parkmark.co.uk/car-park-finder"}
+						                }
+				request(innerOptions, function (error, response, body) {
+					if (!error && response.statusCode == 200)
+          {
+          	parseString(body, function (err, result) {
+              resolve(result)
+            });
+          }
+          else
+          {
+          	reject(error);
+          }
+				});
+    	}
+    	else
+    	{
+    		reject(error);
+    	}
+    });
+	});
+}
 
 function mapper (carPark) {
 	return {
@@ -73,5 +112,6 @@ function ParkingService () {
 }
 
 ParkingService.prototype.getParkingStats = getParkingStats;
+ParkingService.prototype.getParkMarkCarParks = getParkMarkCarParks;
 
 module.exports = ParkingService;

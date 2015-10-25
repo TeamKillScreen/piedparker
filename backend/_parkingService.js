@@ -17,3 +17,13 @@ parkingService.getParkingStats(location)
 	.catch(function (error) {
 		console.dir(error);
 	});
+
+parkingService.getParkMarkCarParks(location)
+  .then(function (data) {
+    if (data) {
+      eyes.inspect(data);
+    }
+  })
+  .catch(function (error) {
+    console.dir(error);
+  });
