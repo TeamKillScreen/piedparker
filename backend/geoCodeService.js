@@ -7,7 +7,7 @@
 
 // node_modules
 var eyes = require("eyes");
-var Promise = require("Promise");
+var Promise = require("promise");
 var request = require("request");
 var util = require("util");
 

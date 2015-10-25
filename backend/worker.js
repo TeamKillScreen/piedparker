@@ -7,10 +7,10 @@ require('log-timestamp');
 /* global console */
 
 var eyes = require("eyes");
-var Firebase = require("Firebase");
+var Firebase = require("firebase");
 
-var ParkingService = require("./ParkingService");
-var PoliceService = require("./PoliceService");
+var ParkingService = require("./parkingService");
+var PoliceService = require("./policeService");
 
 var firebaseUrl = "https://piedparker.firebaseio.com/locations/";
 var rootRef = new Firebase(firebaseUrl);

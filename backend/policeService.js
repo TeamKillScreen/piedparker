@@ -7,10 +7,10 @@
 
 var _ = require("lodash");
 var geolib = require("geolib");
-var Promise = require("Promise");
+var Promise = require("promise");
 var request = require("request");
 var lsq = require('least-squares');
-var Firebase = require("Firebase");
+var Firebase = require("firebase");
 var md5 = require("md5");
 
 function mapper (crime) {

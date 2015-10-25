@@ -7,10 +7,10 @@
 
 var _ = require("lodash");
 var eyes = require("eyes");
-var Promise = require("Promise");
+var Promise = require("promise");
 var request = require("request");
 var parseString = require('xml2js').parseString;
-var Firebase = require("Firebase");
+var Firebase = require("firebase");
 var md5 = require("md5");
 
 function getClosestParkMarkCarPark(location)
