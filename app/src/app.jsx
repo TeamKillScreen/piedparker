@@ -23,26 +23,35 @@ var Main = React.createClass({displayName: 'Main',
 			parking: [],
 			lon: lon,
 			lat: lat,
-			mode: mode
+			mode: mode,
+			crimeType: "crime"
 		};
 	},
 	componentWillMount: function() {
-		this.fireBaseBindings();
+		this.fireBaseBindings(this.state.crimeType);
 	},
-	fireBaseBindings: function() {
+	fireBaseBindings: function(crime) {
+		try
+		{
+			this.unbind("parking");
+			this.unbind("crime");
+			this.unbind("location");
+		} catch (e) {
+		}
+		
 		var component = this;
 		
 		var binding = function(url) {
 				var firebaseParkingRef = new Firebase(url + "/parking");
 				component.bindAsArray(firebaseParkingRef.limitToLast(25), 'parking');
 				
-				var firebaseCrimeRef = new Firebase(url + "/crime");
+				var firebaseCrimeRef = new Firebase(url + "/" + crime);
 				component.bindAsArray(firebaseCrimeRef.limitToLast(25), 'crime');
 				
 				var firebaseLocationRef = new Firebase(url + "/location");
 				component.bindAsArray(firebaseLocationRef.limitToLast(25), 'location');
 				
-				component.setState({fireBaseUrl: url});
+				component.setState({fireBaseUrl: url, crimeType: crime});
 			};
 		
 		if (component.state.mode == 'test') {
@@ -55,18 +64,27 @@ var Main = React.createClass({displayName: 'Main',
 		}
 	},
 	parkCar: function(loginToAdd) {
-    	//this.setState({logins: this.state.logins.concat(loginToAdd)});
+    	this.fireBaseBindings("crime");
   	},
 	parkBike: function(loginToAdd) {
-    	//this.setState({logins: this.state.logins.concat(loginToAdd)});
+    	this.fireBaseBindings("theft");
   	},
 	render: function() {
+		var parking = (<div></div>);
+		if (this.state.crimeType == "crime")
+		{		 
+			parking = (
+				<div>
+					<Map details={this.state.parking} lon={this.state.lon} lat={this.state.lat} />
+					<CarParks details={this.state.parking} total={this.state.parking.length} />
+				</div>
+			);
+		}
 		return (
 			<div>
 				<Choice parkCar={this.parkCar} parkBike={this.parkBike} />
 				<Crime details={this.state.crime} lon={this.state.lon} lat={this.state.lat} location={this.state.location} />
-				<Map details={this.state.parking} lon={this.state.lon} lat={this.state.lat} />
-				<CarParks details={this.state.parking} total={this.state.parking.length} />
+				{parking}
 			</div>
 		);
 	}

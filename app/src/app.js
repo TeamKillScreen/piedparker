@@ -71,26 +71,33 @@
 				parking: [],
 				lon: lon,
 				lat: lat,
-				mode: mode
+				mode: mode,
+				crimeType: "crime"
 			};
 		},
 		componentWillMount: function componentWillMount() {
-			this.fireBaseBindings();
+			this.fireBaseBindings(this.state.crimeType);
 		},
-		fireBaseBindings: function fireBaseBindings() {
+		fireBaseBindings: function fireBaseBindings(crime) {
+			try {
+				this.unbind("parking");
+				this.unbind("crime");
+				this.unbind("location");
+			} catch (e) {}
+
 			var component = this;
 
 			var binding = function binding(url) {
 				var firebaseParkingRef = new Firebase(url + "/parking");
 				component.bindAsArray(firebaseParkingRef.limitToLast(25), 'parking');
 
-				var firebaseCrimeRef = new Firebase(url + "/crime");
+				var firebaseCrimeRef = new Firebase(url + "/" + crime);
 				component.bindAsArray(firebaseCrimeRef.limitToLast(25), 'crime');
 
 				var firebaseLocationRef = new Firebase(url + "/location");
 				component.bindAsArray(firebaseLocationRef.limitToLast(25), 'location');
 
-				component.setState({ fireBaseUrl: url });
+				component.setState({ fireBaseUrl: url, crimeType: crime });
 			};
 
 			if (component.state.mode == 'test') {
@@ -102,19 +109,27 @@
 			}
 		},
 		parkCar: function parkCar(loginToAdd) {
-			//this.setState({logins: this.state.logins.concat(loginToAdd)});
+			this.fireBaseBindings("crime");
 		},
 		parkBike: function parkBike(loginToAdd) {
-			//this.setState({logins: this.state.logins.concat(loginToAdd)});
+			this.fireBaseBindings("theft");
 		},
 		render: function render() {
+			var parking = React.createElement('div', null);
+			if (this.state.crimeType == "crime") {
+				parking = React.createElement(
+					'div',
+					null,
+					React.createElement(Map, { details: this.state.parking, lon: this.state.lon, lat: this.state.lat }),
+					React.createElement(CarParks, { details: this.state.parking, total: this.state.parking.length })
+				);
+			}
 			return React.createElement(
 				'div',
 				null,
 				React.createElement(Choice, { parkCar: this.parkCar, parkBike: this.parkBike }),
 				React.createElement(Crime, { details: this.state.crime, lon: this.state.lon, lat: this.state.lat, location: this.state.location }),
-				React.createElement(Map, { details: this.state.parking, lon: this.state.lon, lat: this.state.lat }),
-				React.createElement(CarParks, { details: this.state.parking, total: this.state.parking.length })
+				parking
 			);
 		}
 	});
@@ -36214,46 +36229,66 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 	var React = __webpack_require__(1);
 
 	var Choice = React.createClass({
-			displayName: "Choice",
+		displayName: "Choice",
 
-			render: function render() {
-					return React.createElement(
-							"div",
-							null,
+		getInitialState: function getInitialState() {
+			return {
+				carParkDisabled: true,
+				bikeParkDisabled: false
+			};
+		},
+		handleParkBike: function handleParkBike(e) {
+			this.setState({
+				carParkDisabled: false,
+				bikeParkDisabled: true
+			});
+			this.props.parkBike();
+		},
+		handleParkCar: function handleParkCar(e) {
+			this.setState({
+				carParkDisabled: true,
+				bikeParkDisabled: false
+			});
+			this.props.parkCar();
+		},
+		render: function render() {
+			return React.createElement(
+				"div",
+				null,
+				React.createElement(
+					"div",
+					{ className: "choice-card mdl-card mdl-shadow--2dp" },
+					React.createElement(
+						"div",
+						{ className: "mdl-card__supporting-text" },
+						React.createElement(
+							"button",
+							{ title: "Park your car", className: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect park-your-car mdl-button--colored", disabled: this.state.carParkDisabled, onClick: this.handleParkCar },
 							React.createElement(
-									"div",
-									{ className: "choice-card mdl-card mdl-shadow--2dp" },
-									React.createElement(
-											"div",
-											{ className: "mdl-card__supporting-text" },
-											React.createElement(
-													"button",
-													{ title: "Park your car", className: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect park-your-car mdl-button--colored", disabled: true },
-													React.createElement(
-															"i",
-															{ className: "material-icons" },
-															"directions_car"
-													)
-											),
-											React.createElement(
-													"button",
-													{ title: "Park your bike", className: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect park-your-bike mdl-button--colored" },
-													React.createElement(
-															"i",
-															{ className: "material-icons" },
-															"directions_bike"
-													)
-											)
-									)
-							),
-							React.createElement("br", null)
-					);
-			}
+								"i",
+								{ className: "material-icons" },
+								"directions_car"
+							)
+						),
+						React.createElement(
+							"button",
+							{ title: "Park your bike", className: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect park-your-bike mdl-button--colored", disabled: this.state.bikeParkDisabled, onClick: this.handleParkBike },
+							React.createElement(
+								"i",
+								{ className: "material-icons" },
+								"directions_bike"
+							)
+						)
+					)
+				),
+				React.createElement("br", null)
+			);
+		}
 	});
 
 	exports["default"] = Choice;
