@@ -10,6 +10,8 @@ var geolib = require("geolib");
 var Promise = require("Promise");
 var request = require("request");
 var lsq = require('least-squares');
+var Firebase = require("Firebase");
+var md5 = require("md5");
 
 function mapper (crime) {
   return crime;
@@ -25,29 +27,17 @@ function getCrimeStats(location, date, distance, category)
     distance = distance || 500;
     category = category || "vehicle-crime";
     
-    var options = {
-      uri: "https://data.police.uk/api/crimes-street/" + category,
-      qs: {
-        lat: location.lat,
-        lng: location.lon,
-        date: date
-      }
-    };
-    
-    setTimeout(function() {
-      request(options, function (error, response, data) {
-        if (error) {
-          reject(error);
-          return;
-        }
-        
-        if (response.statusCode !== 200) {
-          reject(response.statusCode);
-          return;
-        }
+    var firebaseCache = new Firebase("https://piedparker.firebaseio.com/policecache");
+
+    var hash = md5(location.lat + ":" + location.lon + ":" + date + ":" + category);
+
+    firebaseCache.once("value",function(dataSnapshot) {
+      if(dataSnapshot.hasChild(hash))
+      {
+        var data = dataSnapshot.child(hash).val();
 
         var crimes = JSON.parse(data);
-        
+            
         var nearbyCrimes = crimes.filter(function (crime) {
           var point1 = {
               latitude: location.lat,
@@ -70,9 +60,60 @@ function getCrimeStats(location, date, distance, category)
           date: date,
           crimes: _.map(nearbyCrimes, mapper)
         });
-      });
-    }, getRandomInt(0,3000));
+      }
+      else
+      {
+        var options = {
+          uri: "https://data.police.uk/api/crimes-street/" + category,
+          qs: {
+            lat: location.lat,
+            lng: location.lon,
+            date: date
+          }
+        };
+        
+        request(options, function (error, response, data) {
+          if (error) {
+            reject(error);
+            return;
+          }
+          
+          if (response.statusCode !== 200) {
+            reject(response.statusCode);
+            return;
+          }
 
+          dataSnapshot.child(hash).ref().set(data);
+
+          var crimes = JSON.parse(data);
+          
+          var nearbyCrimes = crimes.filter(function (crime) {
+            var point1 = {
+                latitude: location.lat,
+                longitude: location.lon
+              };
+
+            var point2 = {
+                latitude: crime.location.latitude,
+                longitude: crime.location.longitude
+              };
+           
+            var calculatedDistance = geolib.getDistance(point1, point2);
+
+            crime.location.distance = calculatedDistance;
+
+            return calculatedDistance <= distance;
+          });
+
+          resolve({
+            date: date,
+            crimes: _.map(nearbyCrimes, mapper)
+          });
+        });
+
+      }
+    });
+    
   });
 }
 
