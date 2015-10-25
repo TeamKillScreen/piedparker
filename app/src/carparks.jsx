@@ -9,8 +9,27 @@ var CarParks = React.createClass(
 				<CarPark key={index} details={carpark} />
 			)
 		});
+		
+		var loader = (<div></div>);
+		if (this.props.total == 0) {
+			loader = (
+				<div className="carparks-loader">
+					<div className="carparks-loader-wide mdl-card mdl-shadow--2dp">
+						<div className="mdl-card__title">
+							<h1 className="mdl-card__title-text">Car Parks</h1>
+						</div>
+						<div className="mdl-card__supporting-text">
+							<div className="mdl-grid">
+								<div className="mdl-spinner mdl-js-spinner is-active"></div>
+							</div>
+						</div>
+					</div>
+					<br />
+				</div>	
+			)};
       return(
 				<div>
+					{loader}
 					{carparks}
 				</div>
       )

@@ -103,7 +103,7 @@
 				null,
 				React.createElement(Crime, { details: this.state.crime, lon: this.state.lon, lat: this.state.lat, location: this.state.location }),
 				React.createElement(Map, { details: this.state.parking }),
-				React.createElement(CarParks, { details: this.state.parking })
+				React.createElement(CarParks, { details: this.state.parking, total: this.state.parking.length })
 			);
 		}
 	});
@@ -19664,24 +19664,56 @@
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
-			value: true
+		value: true
 	});
 	var React = __webpack_require__(1);
 	var CarPark = __webpack_require__(159);
 
 	var CarParks = React.createClass({
-			displayName: 'CarParks',
+		displayName: 'CarParks',
 
-			render: function render() {
-					var carparks = this.props.details.map(function (carpark, index) {
-							return React.createElement(CarPark, { key: index, details: carpark });
-					});
-					return React.createElement(
+		render: function render() {
+			var carparks = this.props.details.map(function (carpark, index) {
+				return React.createElement(CarPark, { key: index, details: carpark });
+			});
+
+			var loader = React.createElement('div', null);
+			if (this.props.total == 0) {
+				loader = React.createElement(
+					'div',
+					{ className: 'carparks-loader' },
+					React.createElement(
+						'div',
+						{ className: 'carparks-loader-wide mdl-card mdl-shadow--2dp' },
+						React.createElement(
 							'div',
-							null,
-							carparks
-					);
-			}
+							{ className: 'mdl-card__title' },
+							React.createElement(
+								'h1',
+								{ className: 'mdl-card__title-text' },
+								'Car Parks'
+							)
+						),
+						React.createElement(
+							'div',
+							{ className: 'mdl-card__supporting-text' },
+							React.createElement(
+								'div',
+								{ className: 'mdl-grid' },
+								React.createElement('div', { className: 'mdl-spinner mdl-js-spinner is-active' })
+							)
+						)
+					),
+					React.createElement('br', null)
+				);
+			};
+			return React.createElement(
+				'div',
+				null,
+				loader,
+				carparks
+			);
+		}
 	});
 
 	exports['default'] = CarParks;
