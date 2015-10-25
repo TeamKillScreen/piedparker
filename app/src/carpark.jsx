@@ -23,6 +23,14 @@ var CarPark = React.createClass(
         background: 'url(' + backUrl + ') center / cover'
       };
 
+      var hasParkMark = this.props.details.hasParkMark !== undefined ? this.props.details.hasParkMark : false;
+      var riskCss = hasParkMark ? 'rgb(76,175,80)' : 'rgb(255,152,0)';
+
+      var parkMarkStyle = {
+        float: 'right',
+        background: riskCss
+      };
+
       return(
 				<div>
 					<div className="carpark-card-wide mdl-card mdl-shadow--2dp">
@@ -40,8 +48,11 @@ var CarPark = React.createClass(
               <a id="dirs" href={this.getDirectionsUrl(lat, lon)} target="_blank" title="Directions to this location" className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
 								<i className="material-icons">directions</i>
 							</a>
-              <a id="uber" title="Uber from this location" style={{float:'right'}} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+              <a id="uber" title="Uber from this location" style={{margin:'0 0 0 10px'}} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
 								<i className="material-icons">local_taxi</i>
+							</a>
+              <a id="uber" title="Park Mark Approved" style={parkMarkStyle} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+								<i className="material-icons">{hasParkMark == 'true' ? 'verified_user' : 'warning'}</i>
 							</a>
 					  </div>
 					  <div className="mdl-card__menu">

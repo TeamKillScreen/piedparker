@@ -19753,6 +19753,14 @@
 	      background: 'url(' + backUrl + ') center / cover'
 	    };
 
+	    var hasParkMark = this.props.details.hasParkMark !== undefined ? this.props.details.hasParkMark : false;
+	    var riskCss = hasParkMark ? 'rgb(76,175,80)' : 'rgb(255,152,0)';
+
+	    var parkMarkStyle = {
+	      float: 'right',
+	      background: riskCss
+	    };
+
 	    return React.createElement(
 	      'div',
 	      null,
@@ -19797,11 +19805,20 @@
 	          ),
 	          React.createElement(
 	            'a',
-	            { id: 'uber', title: 'Uber from this location', style: { float: 'right' }, className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect' },
+	            { id: 'uber', title: 'Uber from this location', style: { margin: '0 0 0 10px' }, className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect' },
 	            React.createElement(
 	              'i',
 	              { className: 'material-icons' },
 	              'local_taxi'
+	            )
+	          ),
+	          React.createElement(
+	            'a',
+	            { id: 'uber', title: 'Park Mark Approved', style: parkMarkStyle, className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect' },
+	            React.createElement(
+	              'i',
+	              { className: 'material-icons' },
+	              hasParkMark == 'true' ? 'verified_user' : 'warning'
 	            )
 	          )
 	        ),
