@@ -31,7 +31,7 @@ var CarPark = React.createClass(
 
       var parkMarkStyle = {
         float: 'right',
-        background: riskCss
+        display: hasParkMark ? 'block' : 'none'
       };
 
       var numberOfSpaces = this.props.details.spaces > 0 ? this.props.details.spaces + ' ' : 'No '
@@ -57,9 +57,9 @@ var CarPark = React.createClass(
               <a id="dirs" href={this.getDirectionsUrl(lat, lon)} target="_blank" title="Directions to this location" className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
 								<i className="material-icons">directions</i>
 							</a>
-              <a id="uber" title={hasParkMark ? "Park mark approved" : "Use with caution"} style={parkMarkStyle} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
-								<i className="material-icons">{riskIcon}</i>
-							</a>
+              <a href='http://www.parkmark.co.uk/about-the-safer-parking-scheme' target="_blank">
+                <img src='assets/parkmark-100px.png' id="parkMark" title="Park mark approved" style={parkMarkStyle} />
+              </a>
 					  </div>
 					</div>
 					<br />
