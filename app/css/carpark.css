@@ -41,3 +41,7 @@ body {
 .google-map-card {
   height: 300px;
 }
+
+.park-your-bike, .park-your-car {
+  margin-left: 15px;
+}
