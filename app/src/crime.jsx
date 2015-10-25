@@ -20,9 +20,24 @@ var Risk = React.createClass(
 var Crime = React.createClass(
   {
     render: function(){
+		var lat = this.props.lat;
+		var lon = this.props.lon;
+		var backUrl = 'https://maps.googleapis.com/maps/api/streetview?size=480x160&location=' + lat + ',' + lon + '&key=AIzaSyAckgB0_dFK2D1ERLQC2LVC0jpwsM5gjDY';
+		var backgroundStyle = {
+			color: '#fff',
+			height: '160px',
+			background: 'url(' + backUrl + ') center / cover'
+		};
+	
+		var locationAddress = _.first(_.where(this.props.location, { ".key": "address"}));
+		var address = "";
+		if (locationAddress !== undefined) {
+			var address = locationAddress.formattedAddress;
+		}
+		
 		var content;
 		var risk = _.first(_.where(this.props.details, { ".key": "risk"}));
-		if (risk !== undefined) {
+		if (risk !== undefined) {		
 			content = (
 					<div className="mdl-card__supporting-text risks">
 						<div className="mdl-grid">
@@ -49,15 +64,14 @@ var Crime = React.createClass(
 					  <div className="mdl-card__title">
 					    <h1 className="mdl-card__title-text">Crime Stats</h1>
 					  </div>
+					  <div>
+					<div style={backgroundStyle} className="mdl-card__title">
+					</div>
+						<div className="mdl-card__supporting-text">
+							<h1 className="mdl-card__title-text">{address}</h1>
+						</div>
+					</div>
 					  {content}
-					  <div className="mdl-card__actions mdl-card--border">
-					    <a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
-					      Rating
-					    </a>
-							<a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
-								A button
-							</a>
-					  </div>
 					  <div className="mdl-card__menu">
 					    <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
 					      <i className="material-icons">menu</i>

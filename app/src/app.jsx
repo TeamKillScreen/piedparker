@@ -34,6 +34,9 @@ var Main = React.createClass({displayName: 'Main',
 				var firebaseCrimeRef = new Firebase(url + "/crime");
 				component.bindAsArray(firebaseCrimeRef.limitToLast(25), 'crime');
 				
+				var firebaseLocationRef = new Firebase(url + "/location");
+				component.bindAsArray(firebaseLocationRef.limitToLast(25), 'location');
+				
 				component.setState({fireBaseUrl: url});
 			};
 		
@@ -49,7 +52,7 @@ var Main = React.createClass({displayName: 'Main',
 	render: function() {
 		return (
 			<div>
-				<Crime details={this.state.crime} />
+				<Crime details={this.state.crime} lon={this.state.lon} lat={this.state.lat} location={this.state.location} />
 				<Map details={this.state.parking} />
 				<CarParks details={this.state.parking} />
 			</div>

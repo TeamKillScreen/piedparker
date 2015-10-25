@@ -82,6 +82,9 @@
 				var firebaseCrimeRef = new Firebase(url + "/crime");
 				component.bindAsArray(firebaseCrimeRef.limitToLast(25), 'crime');
 
+				var firebaseLocationRef = new Firebase(url + "/location");
+				component.bindAsArray(firebaseLocationRef.limitToLast(25), 'location');
+
 				component.setState({ fireBaseUrl: url });
 			};
 
@@ -97,7 +100,7 @@
 			return React.createElement(
 				'div',
 				null,
-				React.createElement(Crime, { details: this.state.crime }),
+				React.createElement(Crime, { details: this.state.crime, lon: this.state.lon, lat: this.state.lat, location: this.state.location }),
 				React.createElement(Map, { details: this.state.parking }),
 				React.createElement(CarParks, { details: this.state.parking })
 			);
@@ -19867,6 +19870,21 @@
 		displayName: 'Crime',
 
 		render: function render() {
+			var lat = this.props.lat;
+			var lon = this.props.lon;
+			var backUrl = 'https://maps.googleapis.com/maps/api/streetview?size=480x160&location=' + lat + ',' + lon + '&key=AIzaSyAckgB0_dFK2D1ERLQC2LVC0jpwsM5gjDY';
+			var backgroundStyle = {
+				color: '#fff',
+				height: '160px',
+				background: 'url(' + backUrl + ') center / cover'
+			};
+
+			var locationAddress = _.first(_.where(this.props.location, { ".key": "address" }));
+			var address = "";
+			if (locationAddress !== undefined) {
+				var address = locationAddress.formattedAddress;
+			}
+
 			var content;
 			var risk = _.first(_.where(this.props.details, { ".key": "risk" }));
 			if (risk !== undefined) {
@@ -19907,21 +19925,21 @@
 							'Crime Stats'
 						)
 					),
-					content,
 					React.createElement(
 						'div',
-						{ className: 'mdl-card__actions mdl-card--border' },
+						null,
+						React.createElement('div', { style: backgroundStyle, className: 'mdl-card__title' }),
 						React.createElement(
-							'a',
-							{ className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-							'Rating'
-						),
-						React.createElement(
-							'a',
-							{ className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-							'A button'
+							'div',
+							{ className: 'mdl-card__supporting-text' },
+							React.createElement(
+								'h1',
+								{ className: 'mdl-card__title-text' },
+								address
+							)
 						)
 					),
+					content,
 					React.createElement(
 						'div',
 						{ className: 'mdl-card__menu' },
