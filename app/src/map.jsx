@@ -38,24 +38,13 @@ var Map = React.createClass(
 		var markers = this.props.details.map(function(carpark, index) {
 			return {
 				position: {
-					lat: carpark.location.lat,
-					lng: carpark.location.lon,
+					lat: parseFloat(carpark.location.lat),
+					lng: parseFloat(carpark.location.lon),
 				},
       			key: index,
       			defaultAnimation: 2
 			}
 		});
-		
-		markers.push(
-			{
-				position: {
-					lat: this.props.lat,
-					lng: this.props.lon,
-				},
-      			key: "youarehere",
-      			defaultAnimation: 1
-			}
-		);
 		
 		var content;
 		
@@ -66,6 +55,17 @@ var Map = React.createClass(
 		}
 		else
 		{
+			markers.push(
+			{
+				position: {
+					lat: parseFloat(this.props.lat),
+					lng: parseFloat(this.props.lon),
+				},
+      			key: "youarehere",
+      			defaultAnimation: 1
+				}
+			);
+		
 			content = (<SimpleMap lon={this.props.lon} lat={this.props.lat} markers={markers} />);
 		}
 		
