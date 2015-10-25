@@ -72,44 +72,46 @@ function getCrimeStats(location, date, distance, category)
           }
         };
         
-        request(options, function (error, response, data) {
-          if (error) {
-            reject(error);
-            return;
-          }
-          
-          if (response.statusCode !== 200) {
-            reject(response.statusCode);
-            return;
-          }
+        setTimeout(function() {
+          request(options, function (error, response, data) {
+            if (error) {
+              reject(error);
+              return;
+            }
+            
+            if (response.statusCode !== 200) {
+              reject(response.statusCode);
+              return;
+            }
 
-          dataSnapshot.child(hash).ref().set(data);
+            dataSnapshot.child(hash).ref().set(data);
 
-          var crimes = JSON.parse(data);
-          
-          var nearbyCrimes = crimes.filter(function (crime) {
-            var point1 = {
-                latitude: location.lat,
-                longitude: location.lon
-              };
+            var crimes = JSON.parse(data);
+            
+            var nearbyCrimes = crimes.filter(function (crime) {
+              var point1 = {
+                  latitude: location.lat,
+                  longitude: location.lon
+                };
 
-            var point2 = {
-                latitude: crime.location.latitude,
-                longitude: crime.location.longitude
-              };
-           
-            var calculatedDistance = geolib.getDistance(point1, point2);
+              var point2 = {
+                  latitude: crime.location.latitude,
+                  longitude: crime.location.longitude
+                };
+             
+              var calculatedDistance = geolib.getDistance(point1, point2);
 
-            crime.location.distance = calculatedDistance;
+              crime.location.distance = calculatedDistance;
 
-            return calculatedDistance <= distance;
+              return calculatedDistance <= distance;
+            });
+
+            resolve({
+              date: date,
+              crimes: _.map(nearbyCrimes, mapper)
+            });
           });
-
-          resolve({
-            date: date,
-            crimes: _.map(nearbyCrimes, mapper)
-          });
-        });
+        }, getRandomInt(0,1000));
 
       }
     });
