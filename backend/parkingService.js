@@ -11,6 +11,37 @@ var Promise = require("Promise");
 var request = require("request");
 var parseString = require('xml2js').parseString;
 
+function getClosestParkMarkCarPark(location)
+{
+	return new Promise(function(resolve, reject){
+		getParkMarkCarParks(location)
+			.then(function (data) {
+				if (data)
+				{
+					var minDistance = 1000;
+					var closestCarpark = null;
+
+					_.each(data.markers.marker, function(item) {
+						if(item.$.distance < minDistance)
+						{
+							minDistance = item.$.distance;
+							closestCarpark = item.$;
+						}
+					});
+
+					resolve(closestCarpark);
+				}
+				else
+				{
+					reject("No data");
+				}
+			})
+			.catch(function (error) {
+				reject(error);
+			});
+	});
+}
+
 function getParkMarkCarParks(location)
 {
 	return new Promise(function (resolve, reject) {
@@ -27,12 +58,12 @@ function getParkMarkCarParks(location)
 						                  jar: jar,
 						                  method: "GET",
 						                  headers: {"Referer": "http://www.parkmark.co.uk/car-park-finder"}
-						                }
+						                };
 				request(innerOptions, function (error, response, body) {
 					if (!error && response.statusCode == 200)
           {
           	parseString(body, function (err, result) {
-              resolve(result)
+              resolve(result);
             });
           }
           else
@@ -46,6 +77,18 @@ function getParkMarkCarParks(location)
     		reject(error);
     	}
     });
+	});
+}
+
+function setParkMark (carPark) {
+	return new Promise(function (resolve, reject) {
+		getClosestParkMarkCarPark(carPark.location).then(function(data){
+			carPark.hasParkMark = (data.Spaces == carPark.capacity);
+
+			resolve(carPark);
+		}).catch(function (error) {
+			reject(error);
+		});
 	});
 }
 
@@ -64,6 +107,16 @@ function mapper (carPark) {
 		spacesIn30Minutes: carPark.PredictedSpaces30Mins,
 		spacesIn60Minutes: carPark.PredictedSpaces60Mins
 	};
+}
+
+function setParkMarks (carParks) {
+	var promises = [];
+
+	_.each(carParks, function (carPark) {
+		promises.push(setParkMark(carPark));
+	});
+
+	return Promise.all(promises);
 }
 
 function getParkingStats (location) {
@@ -101,7 +154,9 @@ function getParkingStats (location) {
 
 			var json = JSON.parse(data);
 
-			resolve(_.map(json, mapper));
+			var carParks = _.map(json, mapper);
+
+			resolve(carParks);
 		};
 		
 		request(options, callback);		
@@ -113,5 +168,7 @@ function ParkingService () {
 
 ParkingService.prototype.getParkingStats = getParkingStats;
 ParkingService.prototype.getParkMarkCarParks = getParkMarkCarParks;
+ParkingService.prototype.getClosestParkMarkCarPark = getClosestParkMarkCarPark;
+ParkingService.prototype.setParkMarks = setParkMarks;
 
 module.exports = ParkingService;

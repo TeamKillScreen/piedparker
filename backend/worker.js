@@ -28,12 +28,20 @@ function updateParking(location, snapshot)
     .then(function (data) {
       if (data.length) {
         //eyes.inspect(data);
+
+        parkingService.setParkMarks(data)
+          .then(function (data) {
+            snapshot.ref().child("parking").set(data, function (error) {
+              if (error) {
+                eyes.inspect(error);          
+              }
+            });     
+          })
+          .catch(function (error) {
+            console.dir(error);
+          });
         
-        snapshot.ref().child("parking").set(data, function (error) {
-          if (error) {
-            eyes.inspect(error);          
-          }
-        });
+        
       }
     })
     .catch(function (error) {
@@ -93,4 +101,4 @@ setInterval(function (){
       updateParking(location, childSnapshot);
     });
   });
-}, 15000);
+}, 30000);
