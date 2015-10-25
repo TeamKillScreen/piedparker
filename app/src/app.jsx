@@ -83,7 +83,7 @@ var Main = React.createClass({displayName: 'Main',
 		return (
 			<div>
 				<Choice parkCar={this.parkCar} parkBike={this.parkBike} />
-				<Crime details={this.state.crime} lon={this.state.lon} lat={this.state.lat} location={this.state.location} />
+				<Crime details={this.state.crime} lon={this.state.lon} lat={this.state.lat} location={this.state.location} crimeType={this.state.crimeType} />
 				{parking}
 			</div>
 		);
