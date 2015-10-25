@@ -128,7 +128,7 @@
 				'div',
 				null,
 				React.createElement(Choice, { parkCar: this.parkCar, parkBike: this.parkBike }),
-				React.createElement(Crime, { details: this.state.crime, lon: this.state.lon, lat: this.state.lat, location: this.state.location }),
+				React.createElement(Crime, { details: this.state.crime, lon: this.state.lon, lat: this.state.lat, location: this.state.location, crimeType: this.state.crimeType }),
 				parking
 			);
 		}
@@ -19949,6 +19949,12 @@
 					)
 				);
 			}
+
+			var crimeTitle = "Bicycle Thefts";
+			if (this.props.crimeType == "crime") {
+				crimeTitle = "Vehicle Crime Stats";
+			}
+
 			return React.createElement(
 				'div',
 				null,
@@ -19961,7 +19967,7 @@
 						React.createElement(
 							'h1',
 							{ className: 'mdl-card__title-text' },
-							'Crime Stats'
+							crimeTitle
 						)
 					),
 					React.createElement(

@@ -57,12 +57,18 @@ var Crime = React.createClass(
 						</div>
 					);
 		}
+		
+		var crimeTitle = "Bicycle Thefts";
+		if (this.props.crimeType == "crime") {
+			crimeTitle = "Vehicle Crime Stats";
+		}
+		
       return(
 	  	
 				<div>
 					<div className="crime-card-wide mdl-card mdl-shadow--2dp">
 					  <div className="mdl-card__title">
-					    <h1 className="mdl-card__title-text">Crime Stats</h1>
+					    <h1 className="mdl-card__title-text">{crimeTitle}</h1>
 					  </div>
 					  <div>
 					<div style={backgroundStyle} className="mdl-card__title">
