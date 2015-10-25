@@ -19816,7 +19816,11 @@
 					{ className: classes },
 					this.props.details.numberOfCrimes
 				),
-				React.createElement('div', { className: 'clear-fix' })
+				React.createElement(
+					'p',
+					null,
+					this.props.name
+				)
 			);
 		}
 	});
@@ -19834,40 +19838,9 @@
 					React.createElement(
 						'div',
 						{ className: 'mdl-grid' },
-						React.createElement(Risk, { details: risk.currentMonth, name: 'Current' }),
-						React.createElement(Risk, { details: risk.highestMonth, name: 'Worst' }),
-						React.createElement(Risk, { details: risk.futureForecast, name: 'Forcast' })
-					),
-					React.createElement(
-						'div',
-						{ className: 'mdl-grid' },
-						React.createElement(
-							'div',
-							{ className: 'mdl-cell mdl-cell--4-col' },
-							React.createElement(
-								'span',
-								null,
-								'Current'
-							)
-						),
-						React.createElement(
-							'div',
-							{ className: 'mdl-cell mdl-cell--4-col' },
-							React.createElement(
-								'span',
-								null,
-								'Worst'
-							)
-						),
-						React.createElement(
-							'div',
-							{ className: 'mdl-cell mdl-cell--4-col' },
-							React.createElement(
-								'span',
-								null,
-								'Forcast'
-							)
-						)
+						React.createElement(Risk, { details: risk.currentMonth, name: 'Current Month' }),
+						React.createElement(Risk, { details: risk.highestMonth, name: 'Worst Month' }),
+						React.createElement(Risk, { details: risk.futureForecast, name: 'Furture Forcast' })
 					)
 				);
 			} else {
