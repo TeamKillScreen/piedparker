@@ -19725,18 +19725,21 @@
 	          { className: 'mdl-card__actions mdl-card--border' },
 	          React.createElement(
 	            'a',
-	            { className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-	            'Rating'
+	            { id: 'dirs', href: this.getDirectionsUrl(lat, lon), target: '_blank', title: 'Directions to this location', className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect' },
+	            React.createElement(
+	              'i',
+	              { className: 'material-icons' },
+	              'directions'
+	            )
 	          ),
 	          React.createElement(
 	            'a',
-	            { href: this.getDirectionsUrl(lat, lon), target: '_blank', className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-	            'Directions'
-	          ),
-	          React.createElement(
-	            'a',
-	            { className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-	            'UBER'
+	            { id: 'uber', title: 'Uber from this location', style: { float: 'right' }, className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect' },
+	            React.createElement(
+	              'i',
+	              { className: 'material-icons' },
+	              'local_taxi'
+	            )
 	          )
 	        ),
 	        React.createElement(
