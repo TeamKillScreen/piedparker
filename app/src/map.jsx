@@ -13,7 +13,7 @@ var SimpleMap = React.createClass(
 							width: "100%"
 						},
 					}}
-					defaultZoom={12}
+					defaultZoom={15}
 					defaultCenter={{lat: parseFloat(this.props.lat), lng: parseFloat(this.props.lon)}}
 					>
 						{this.props.markers.map((marker, index) => {
@@ -40,6 +40,30 @@ var Map = React.createClass(
       			defaultAnimation: 2
 			}
 		});
+		
+		markers.push(
+			{
+				position: {
+					lat: this.props.lat,
+					lng: this.props.lon,
+				},
+      			key: "youarehere",
+      			defaultAnimation: 1
+			}
+		);
+		
+		var content;
+		
+		if (this.props.lon == "" || this.props.lat == "") {
+			content = (<div className="mdl-grid">
+							<div className="mdl-spinner mdl-js-spinner is-active"></div>
+						</div>);
+		}
+		else
+		{
+			content = (<SimpleMap lon={this.props.lon} lat={this.props.lat} markers={markers} />);
+		}
+		
       return(
 				<div>
 					<div className="carparkmap-card-wide mdl-card mdl-shadow--2dp">
@@ -47,7 +71,7 @@ var Map = React.createClass(
 					    <h1 className="mdl-card__title-text">Car Park Map</h1>
 					  </div>
 					  <div className="google-map-card mdl-card__supporting-text">
-					    <SimpleMap lon={this.props.lon} lat={this.props.lat} markers={markers} />
+					    {content}
 					  </div>
 					</div>
 					<br />

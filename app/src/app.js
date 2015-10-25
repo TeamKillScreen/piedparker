@@ -32390,7 +32390,7 @@
 								width: "100%"
 							}
 						},
-						defaultZoom: 12,
+						defaultZoom: 15,
 						defaultCenter: { lat: parseFloat(this.props.lat), lng: parseFloat(this.props.lon) }
 					},
 					this.props.markers.map(function (marker, index) {
@@ -32415,6 +32415,28 @@
 					defaultAnimation: 2
 				};
 			});
+
+			markers.push({
+				position: {
+					lat: this.props.lat,
+					lng: this.props.lon
+				},
+				key: "youarehere",
+				defaultAnimation: 1
+			});
+
+			var content;
+
+			if (this.props.lon == "" || this.props.lat == "") {
+				content = React.createElement(
+					"div",
+					{ className: "mdl-grid" },
+					React.createElement("div", { className: "mdl-spinner mdl-js-spinner is-active" })
+				);
+			} else {
+				content = React.createElement(SimpleMap, { lon: this.props.lon, lat: this.props.lat, markers: markers });
+			}
+
 			return React.createElement(
 				"div",
 				null,
@@ -32433,7 +32455,7 @@
 					React.createElement(
 						"div",
 						{ className: "google-map-card mdl-card__supporting-text" },
-						React.createElement(SimpleMap, { lon: this.props.lon, lat: this.props.lat, markers: markers })
+						content
 					)
 				),
 				React.createElement("br", null)
