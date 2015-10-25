@@ -37,14 +37,11 @@ var CarPark = React.createClass(
               </div>
 					  </div>
 					  <div className="mdl-card__actions mdl-card--border">
-					    <a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
-					      Rating
-					    </a>
-							<a href={this.getDirectionsUrl(lat, lon)} target="_blank" className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
-								Directions
+              <a id="dirs" href={this.getDirectionsUrl(lat, lon)} target="_blank" title="Directions to this location" className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+								<i className="material-icons">directions</i>
 							</a>
-							<a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
-								UBER
+              <a id="uber" title="Uber from this location" style={{float:'right'}} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+								<i className="material-icons">local_taxi</i>
 							</a>
 					  </div>
 					  <div className="mdl-card__menu">

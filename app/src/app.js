@@ -48,9 +48,9 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(157);
-	var CarParks = __webpack_require__(161);
+	var CarParks = __webpack_require__(158);
 	var Crime = __webpack_require__(160);
-	var Map = __webpack_require__(159);
+	var Map = __webpack_require__(161);
 
 	function getParameterByName(name) {
 		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -19660,6 +19660,36 @@
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
+			value: true
+	});
+	var React = __webpack_require__(1);
+	var CarPark = __webpack_require__(159);
+
+	var CarParks = React.createClass({
+			displayName: 'CarParks',
+
+			render: function render() {
+					var carparks = this.props.details.map(function (carpark, index) {
+							return React.createElement(CarPark, { key: index, details: carpark });
+					});
+					return React.createElement(
+							'div',
+							null,
+							carparks
+					);
+			}
+	});
+
+	exports['default'] = CarParks;
+	module.exports = exports['default'];
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
 	var React = __webpack_require__(1);
@@ -19722,18 +19752,21 @@
 	          { className: 'mdl-card__actions mdl-card--border' },
 	          React.createElement(
 	            'a',
-	            { className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-	            'Rating'
+	            { id: 'dirs', href: this.getDirectionsUrl(lat, lon), target: '_blank', title: 'Directions to this location', className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect' },
+	            React.createElement(
+	              'i',
+	              { className: 'material-icons' },
+	              'directions'
+	            )
 	          ),
 	          React.createElement(
 	            'a',
-	            { href: this.getDirectionsUrl(lat, lon), target: '_blank', className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-	            'Directions'
-	          ),
-	          React.createElement(
-	            'a',
-	            { className: 'mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect' },
-	            'UBER'
+	            { id: 'uber', title: 'Uber from this location', style: { float: 'right' }, className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect' },
+	            React.createElement(
+	              'i',
+	              { className: 'material-icons' },
+	              'local_taxi'
+	            )
 	          )
 	        ),
 	        React.createElement(
@@ -19757,77 +19790,6 @@
 
 	exports['default'] = CarPark;
 	module.exports = exports['default'];
-
-/***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-			value: true
-	});
-	var React = __webpack_require__(1);
-
-	var Map = React.createClass({
-			displayName: "Map",
-
-			render: function render() {
-					return React.createElement(
-							"div",
-							null,
-							React.createElement(
-									"div",
-									{ className: "carparkmap-card-wide mdl-card mdl-shadow--2dp" },
-									React.createElement(
-											"div",
-											{ className: "mdl-card__title" },
-											React.createElement(
-													"h1",
-													{ className: "mdl-card__title-text" },
-													"Car Park Map"
-											)
-									),
-									React.createElement(
-											"div",
-											{ className: "mdl-card__supporting-text" },
-											"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia..."
-									),
-									React.createElement(
-											"div",
-											{ className: "mdl-card__actions mdl-card--border" },
-											React.createElement(
-													"a",
-													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
-													"Rating"
-											),
-											React.createElement(
-													"a",
-													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
-													"A button"
-											)
-									),
-									React.createElement(
-											"div",
-											{ className: "mdl-card__menu" },
-											React.createElement(
-													"button",
-													{ className: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" },
-													React.createElement(
-															"i",
-															{ className: "material-icons" },
-															"menu"
-													)
-											)
-									)
-							),
-							React.createElement("br", null)
-					);
-			}
-	});
-
-	exports["default"] = Map;
-	module.exports = exports["default"];
 
 /***/ },
 /* 160 */
@@ -19975,31 +19937,72 @@
 /* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 			value: true
 	});
 	var React = __webpack_require__(1);
-	var CarPark = __webpack_require__(158);
 
-	var CarParks = React.createClass({
-			displayName: 'CarParks',
+	var Map = React.createClass({
+			displayName: "Map",
 
 			render: function render() {
-					var carparks = this.props.details.map(function (carpark, index) {
-							return React.createElement(CarPark, { key: index, details: carpark });
-					});
 					return React.createElement(
-							'div',
+							"div",
 							null,
-							carparks
+							React.createElement(
+									"div",
+									{ className: "carparkmap-card-wide mdl-card mdl-shadow--2dp" },
+									React.createElement(
+											"div",
+											{ className: "mdl-card__title" },
+											React.createElement(
+													"h1",
+													{ className: "mdl-card__title-text" },
+													"Car Park Map"
+											)
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__supporting-text" },
+											"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia..."
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__actions mdl-card--border" },
+											React.createElement(
+													"a",
+													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+													"Rating"
+											),
+											React.createElement(
+													"a",
+													{ className: "mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" },
+													"A button"
+											)
+									),
+									React.createElement(
+											"div",
+											{ className: "mdl-card__menu" },
+											React.createElement(
+													"button",
+													{ className: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" },
+													React.createElement(
+															"i",
+															{ className: "material-icons" },
+															"menu"
+													)
+											)
+									)
+							),
+							React.createElement("br", null)
 					);
 			}
 	});
 
-	exports['default'] = CarParks;
-	module.exports = exports['default'];
+	exports["default"] = Map;
+	module.exports = exports["default"];
 
 /***/ },
 /* 162 */
