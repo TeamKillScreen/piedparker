@@ -3,6 +3,10 @@ import { GoogleMap, Marker, SearchBox } from "react-google-maps";
 
 var SimpleMap = React.createClass(
   {
+  	handleMarkerClick: function(index, event) {
+	  	var marker = this.props.markers[index];
+		window.open("https://piedparker2015.azurewebsites.net/index.html?lat=" + marker.position.lat + "&lon=" + marker.position.lng)
+	},
     render: function(){
       return(
 	  			// https://github.com/tomchentw/react-google-maps
@@ -19,7 +23,8 @@ var SimpleMap = React.createClass(
 						{this.props.markers.map((marker, index) => {
 							return (
 								<Marker
-								{...marker} />
+								{...marker}
+								onClick={this.handleMarkerClick.bind(this, index)} />
 							);
 						})}
 					</GoogleMap>
