@@ -7,7 +7,6 @@ body {
 }
 
 .carpark-card-wide.mdl-card {
-  <!--width: 480px;-->
 }
 
 .carpark-title {
@@ -16,7 +15,6 @@ body {
 }
 
 .carpark-spaces {
-  <!--margin-top: 0.5em;-->
   float: right;
 }
 
@@ -38,4 +36,8 @@ body {
 
 .risks {
   text-align: center;
+}
+
+.google-map-card {
+  height: 400px;
 }

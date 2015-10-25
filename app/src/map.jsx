@@ -1,4 +1,23 @@
 var React = require('react');
+import { GoogleMap, Marker, SearchBox } from "react-google-maps";
+
+var SimpleMap = React.createClass(
+  {
+    render: function(){
+      return(
+				<GoogleMap containerProps={{
+						style: {
+							height: "100%",
+							width: "100%"
+						},
+					}}
+					defaultZoom={3}
+					defaultCenter={{lat: -25.363882, lng: 131.044922}}
+					//onClick={props.onMapClick}
+					></GoogleMap>
+			)
+	}
+});
 
 var Map = React.createClass(
   {
@@ -9,9 +28,8 @@ var Map = React.createClass(
 					  <div className="mdl-card__title">
 					    <h1 className="mdl-card__title-text">Car Park Map</h1>
 					  </div>
-					  <div className="mdl-card__supporting-text">
-					    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					    Mauris sagittis pellentesque lacus eleifend lacinia...
+					  <div className="google-map-card mdl-card__supporting-text">
+					    <SimpleMap />
 					  </div>
 					  <div className="mdl-card__actions mdl-card--border">
 					    <a className="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
