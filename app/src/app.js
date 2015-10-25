@@ -19943,9 +19943,9 @@
 				);
 			}
 
-			var crimeTitle = "Bicycle Thefts";
+			var crimeTitle = "Bicycle Thefts Nearby";
 			if (this.props.crimeType == "crime") {
-				crimeTitle = "Vehicle Crime";
+				crimeTitle = "Vehicle Crime Nearby";
 			}
 
 			return React.createElement(
