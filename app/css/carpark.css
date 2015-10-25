@@ -3,13 +3,18 @@ body {
 }
 
 .main {
-  margin: 0px 5px
+  margin: 0px 5px;
+  max-width: 800px; 
 }
 
 .choice-card {
   min-height: 20px;
   text-align: center;
   background: rgb(63,81,181);
+}
+
+.mdl-card {
+  width: 100%;
 }
 
 .carpark-card-wide.mdl-card {
