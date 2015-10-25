@@ -32338,7 +32338,7 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 
 	var _reactGoogleMaps = __webpack_require__(164);
@@ -32346,50 +32346,69 @@
 	var React = __webpack_require__(1);
 
 	var SimpleMap = React.createClass({
-			displayName: "SimpleMap",
+		displayName: "SimpleMap",
 
-			render: function render() {
-					return React.createElement(_reactGoogleMaps.GoogleMap, { containerProps: {
-									style: {
-											height: "100%",
-											width: "100%"
-									}
-							},
-							defaultZoom: 12,
-							defaultCenter: { lat: parseFloat(this.props.lat), lng: parseFloat(this.props.lon) }
-							//onClick={props.onMapClick}
-					});
-			}
+		render: function render() {
+			return(
+				// https://github.com/tomchentw/react-google-maps
+				// http://tomchentw.github.io/react-google-maps/
+				React.createElement(
+					_reactGoogleMaps.GoogleMap,
+					{ containerProps: {
+							style: {
+								height: "100%",
+								width: "100%"
+							}
+						},
+						defaultZoom: 12,
+						defaultCenter: { lat: parseFloat(this.props.lat), lng: parseFloat(this.props.lon) }
+					},
+					this.props.markers.map(function (marker, index) {
+						return React.createElement(_reactGoogleMaps.Marker, marker);
+					})
+				)
+			);
+		}
 	});
 
 	var Map = React.createClass({
-			displayName: "Map",
+		displayName: "Map",
 
-			render: function render() {
-					return React.createElement(
-							"div",
-							null,
-							React.createElement(
-									"div",
-									{ className: "carparkmap-card-wide mdl-card mdl-shadow--2dp" },
-									React.createElement(
-											"div",
-											{ className: "mdl-card__title" },
-											React.createElement(
-													"h1",
-													{ className: "mdl-card__title-text" },
-													"Car Park Map"
-											)
-									),
-									React.createElement(
-											"div",
-											{ className: "google-map-card mdl-card__supporting-text" },
-											React.createElement(SimpleMap, { lon: this.props.lon, lat: this.props.lat })
-									)
-							),
-							React.createElement("br", null)
-					);
-			}
+		render: function render() {
+			var markers = this.props.details.map(function (carpark, index) {
+				return {
+					position: {
+						lat: carpark.location.lat,
+						lng: carpark.location.lon
+					},
+					key: index,
+					defaultAnimation: 2
+				};
+			});
+			return React.createElement(
+				"div",
+				null,
+				React.createElement(
+					"div",
+					{ className: "carparkmap-card-wide mdl-card mdl-shadow--2dp" },
+					React.createElement(
+						"div",
+						{ className: "mdl-card__title" },
+						React.createElement(
+							"h1",
+							{ className: "mdl-card__title-text" },
+							"Car Park Map"
+						)
+					),
+					React.createElement(
+						"div",
+						{ className: "google-map-card mdl-card__supporting-text" },
+						React.createElement(SimpleMap, { lon: this.props.lon, lat: this.props.lat, markers: markers })
+					)
+				),
+				React.createElement("br", null)
+			);
+		}
 	});
 
 	exports["default"] = Map;
