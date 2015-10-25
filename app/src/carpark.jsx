@@ -3,6 +3,8 @@ var React = require('react');
 var CarPark = React.createClass(
   {
     getDirectionsUrl: function(lat, lon){
+      var currentLat; var currentLon;
+
       var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
       var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
 
@@ -10,7 +12,7 @@ var CarPark = React.createClass(
         return 'http://maps.apple.com/?daddr=' + lat + ',' + lon + '&dirflg=d';
       }
       else {
-        return 'http://maps.google.com/?daddr=' + lat + ',' + lon + '&directionsmode=driving';
+        return 'http://maps.google.com/?saddr=' + this.props.lat + ',' + this.props.lon + '&daddr=' + lat + ',' + lon + '&directionsmode=driving';
       };
     },
     render: function(){

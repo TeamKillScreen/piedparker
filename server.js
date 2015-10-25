@@ -47,6 +47,15 @@ app.get("/api/launch/", function (req, res) {
 app.get("/api/parking/", function (req, res) {
   var lat = req.query.lat;
   var lon = req.query.lon;
+
+  var splitLat = lat.split(".");
+  var splitLon = lon.split(".");
+
+  var maxDecimalPoints = 4
+
+  lat = splitLat[0] + "." + splitLat[1].substring(0, splitLat[1].length < maxDecimalPoints ? splitLat[1].length : maxDecimalPoints);
+  lon = splitLon[0] + "." + splitLon[1].substring(0, splitLon[1].length < maxDecimalPoints ? splitLon[1].length : maxDecimalPoints);
+  
   var hash = md5(lat + ":" + lon);
 
   var firebaseLocationUrl = "https://piedparker.firebaseio.com/locations/" + hash;

@@ -184,7 +184,9 @@ function getAllCrimeStatsAndAnalysis (location, distance, category) {
             numberOfCrimes : futureForecast
           }
         },
-        raw : data
+        //raw : data
+        //Disable raw data storage
+        raw : {}
       }); 
     }).catch(function (error) {
       reject(error);
