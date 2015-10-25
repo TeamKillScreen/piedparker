@@ -19788,6 +19788,9 @@
 	      background: riskCss
 	    };
 
+	    var numberOfSpaces = this.props.details.spaces > 0 ? this.props.details.spaces + ' ' : 'No ';
+	    var spacesText = this.props.details.state === 'Spaces' ? numberOfSpaces + 'Spaces' : 'Closed';
+
 	    return React.createElement(
 	      'div',
 	      null,
@@ -19813,8 +19816,7 @@
 	            React.createElement(
 	              'h1',
 	              { className: 'mdl-card__title-text' },
-	              'Spaces:',
-	              this.props.details.spaces
+	              spacesText
 	            )
 	          )
 	        ),

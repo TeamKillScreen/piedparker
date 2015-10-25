@@ -32,6 +32,9 @@ var CarPark = React.createClass(
         background: riskCss
       };
 
+      var numberOfSpaces = this.props.details.spaces > 0 ? this.props.details.spaces + ' ' : 'No '
+      var spacesText = this.props.details.state === 'Spaces' ? numberOfSpaces + 'Spaces' : 'Closed';
+
       return(
 				<div>
 					<div className="carpark-card-wide mdl-card mdl-shadow--2dp">
@@ -42,7 +45,7 @@ var CarPark = React.createClass(
                 <h1 className="mdl-card__title-text">{this.props.details.name}</h1>
               </div>
               <div className="carpark-spaces">
-                <h1 className="mdl-card__title-text">Spaces:{this.props.details.spaces}</h1>
+                <h1 className="mdl-card__title-text">{spacesText}</h1>
               </div>
 					  </div>
 					  <div className="mdl-card__actions mdl-card--border">
