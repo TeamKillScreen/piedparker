@@ -27,6 +27,9 @@ var Main = React.createClass({displayName: 'Main',
 		};
 	},
 	componentWillMount: function() {
+		this.fireBaseBindings();
+	},
+	fireBaseBindings: function() {
 		var component = this;
 		
 		var binding = function(url) {
@@ -51,10 +54,16 @@ var Main = React.createClass({displayName: 'Main',
 			});
 		}
 	},
+	parkCar: function(loginToAdd) {
+    	//this.setState({logins: this.state.logins.concat(loginToAdd)});
+  	},
+	parkBike: function(loginToAdd) {
+    	//this.setState({logins: this.state.logins.concat(loginToAdd)});
+  	},
 	render: function() {
 		return (
 			<div>
-				<Choice />
+				<Choice parkCar={this.parkCar} parkBike={this.parkBike} />
 				<Crime details={this.state.crime} lon={this.state.lon} lat={this.state.lat} location={this.state.location} />
 				<Map details={this.state.parking} lon={this.state.lon} lat={this.state.lat} />
 				<CarParks details={this.state.parking} total={this.state.parking.length} />

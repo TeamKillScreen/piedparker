@@ -75,6 +75,9 @@
 			};
 		},
 		componentWillMount: function componentWillMount() {
+			this.fireBaseBindings();
+		},
+		fireBaseBindings: function fireBaseBindings() {
 			var component = this;
 
 			var binding = function binding(url) {
@@ -98,11 +101,17 @@
 				});
 			}
 		},
+		parkCar: function parkCar(loginToAdd) {
+			//this.setState({logins: this.state.logins.concat(loginToAdd)});
+		},
+		parkBike: function parkBike(loginToAdd) {
+			//this.setState({logins: this.state.logins.concat(loginToAdd)});
+		},
 		render: function render() {
 			return React.createElement(
 				'div',
 				null,
-				React.createElement(Choice, null),
+				React.createElement(Choice, { parkCar: this.parkCar, parkBike: this.parkBike }),
 				React.createElement(Crime, { details: this.state.crime, lon: this.state.lon, lat: this.state.lat, location: this.state.location }),
 				React.createElement(Map, { details: this.state.parking, lon: this.state.lon, lat: this.state.lat }),
 				React.createElement(CarParks, { details: this.state.parking, total: this.state.parking.length })
