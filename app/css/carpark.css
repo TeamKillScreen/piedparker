@@ -50,4 +50,11 @@ body {
 
 .park-your-bike, .park-your-car {
   margin-left: 15px;
+  color: #757575 !important;
+  background: rgba(0,0,0,.12) !important;
+}
+
+.park-your-bike:disabled, .park-your-car:disabled {
+  color: white !important;
+  background: rgb(255,64,129) !important;
 }

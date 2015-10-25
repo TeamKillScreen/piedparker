@@ -41,7 +41,7 @@ var Crime = React.createClass(
 			content = (
 					<div className="mdl-card__supporting-text risks">
 						<div className="mdl-grid">
-							<Risk details={risk.currentMonth} name="Recently"/>
+							<Risk details={risk.currentMonth} name="Recent"/>
 							<Risk details={risk.highestMonth} name="Highest"/>
 							<Risk details={risk.futureForecast} name="Predicted"/>
 						</div>

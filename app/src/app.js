@@ -19926,7 +19926,7 @@
 					React.createElement(
 						'div',
 						{ className: 'mdl-grid' },
-						React.createElement(Risk, { details: risk.currentMonth, name: 'Recently' }),
+						React.createElement(Risk, { details: risk.currentMonth, name: 'Recent' }),
 						React.createElement(Risk, { details: risk.highestMonth, name: 'Highest' }),
 						React.createElement(Risk, { details: risk.futureForecast, name: 'Predicted' })
 					)
