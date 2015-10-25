@@ -33,7 +33,7 @@ var CarPark = React.createClass(
       };
 
       var numberOfSpaces = this.props.details.spaces > 0 ? this.props.details.spaces + ' ' : 'No '
-      var spacesText = this.props.details.state === 'Spaces' ? numberOfSpaces + 'Spaces' : 'Closed';
+      var spacesText = this.props.details.state === 'Spaces' ? numberOfSpaces + 'spaces' : 'Closed';
 
       return(
 				<div>
@@ -52,17 +52,9 @@ var CarPark = React.createClass(
               <a id="dirs" href={this.getDirectionsUrl(lat, lon)} target="_blank" title="Directions to this location" className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
 								<i className="material-icons">directions</i>
 							</a>
-              <a id="uber" title="Uber from this location" style={{margin:'0 0 0 10px'}} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
-								<i className="material-icons">local_taxi</i>
-							</a>
-              <a id="uber" title="Park Mark Approved" style={parkMarkStyle} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+              <a id="uber" title={hasParkMark ? "Park mark approved" : "Use with caution"} style={parkMarkStyle} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
 								<i className="material-icons">{riskIcon}</i>
 							</a>
-					  </div>
-					  <div className="mdl-card__menu">
-					    <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-					      <i className="material-icons">menu</i>
-					    </button>
 					  </div>
 					</div>
 					<br />

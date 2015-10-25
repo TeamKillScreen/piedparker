@@ -41,9 +41,9 @@ var Crime = React.createClass(
 			content = (
 					<div className="mdl-card__supporting-text risks">
 						<div className="mdl-grid">
-							<Risk details={risk.currentMonth} name="Current Month"/>
-							<Risk details={risk.highestMonth} name="Worst Month"/>
-							<Risk details={risk.futureForecast} name="Furture Forcast"/>
+							<Risk details={risk.currentMonth} name="Recently"/>
+							<Risk details={risk.highestMonth} name="Highest"/>
+							<Risk details={risk.futureForecast} name="Predicted"/>
 						</div>
 					</div>
 				);
@@ -60,7 +60,7 @@ var Crime = React.createClass(
 		
 		var crimeTitle = "Bicycle Thefts";
 		if (this.props.crimeType == "crime") {
-			crimeTitle = "Vehicle Crime Stats";
+			crimeTitle = "Vehicle Crime";
 		}
 		
       return(
@@ -78,11 +78,6 @@ var Crime = React.createClass(
 						</div>
 					</div>
 					  {content}
-					  <div className="mdl-card__menu">
-					    <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-					      <i className="material-icons">menu</i>
-					    </button>
-					  </div>
 					</div>
 					<br />
 				</div>
