@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom')
 var CarParks = require('./carparks.jsx')
 var Crime = require('./crime.jsx')
+var Choice = require('./choice.jsx')
 var Map = require('./map.jsx')
 
 function getParameterByName(name) {
@@ -53,6 +54,7 @@ var Main = React.createClass({displayName: 'Main',
 	render: function() {
 		return (
 			<div>
+				<Choice />
 				<Crime details={this.state.crime} lon={this.state.lon} lat={this.state.lat} location={this.state.location} />
 				<Map details={this.state.parking} lon={this.state.lon} lat={this.state.lat} />
 				<CarParks details={this.state.parking} total={this.state.parking.length} />

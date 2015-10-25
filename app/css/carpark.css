@@ -6,6 +6,12 @@ body {
   margin: 0px 5px
 }
 
+.choice-card {
+  min-height: 20px;
+  text-align: center;
+  background: rgb(63,81,181);
+}
+
 .carpark-card-wide.mdl-card {
 }
 

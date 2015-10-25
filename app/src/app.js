@@ -50,6 +50,7 @@
 	var ReactDOM = __webpack_require__(157);
 	var CarParks = __webpack_require__(158);
 	var Crime = __webpack_require__(160);
+	var Choice = __webpack_require__(206);
 	var Map = __webpack_require__(163);
 
 	function getParameterByName(name) {
@@ -101,6 +102,7 @@
 			return React.createElement(
 				'div',
 				null,
+				React.createElement(Choice, null),
 				React.createElement(Crime, { details: this.state.crime, lon: this.state.lon, lat: this.state.lat, location: this.state.location }),
 				React.createElement(Map, { details: this.state.parking, lon: this.state.lon, lat: this.state.lat }),
 				React.createElement(CarParks, { details: this.state.parking, total: this.state.parking.length })
@@ -36194,6 +36196,58 @@
 	  value: true
 	});
 	exports["default"] = ["places_changed"];
+	module.exports = exports["default"];
+
+/***/ },
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+			value: true
+	});
+	var React = __webpack_require__(1);
+
+	var Choice = React.createClass({
+			displayName: "Choice",
+
+			render: function render() {
+					return React.createElement(
+							"div",
+							null,
+							React.createElement(
+									"div",
+									{ className: "choice-card mdl-card mdl-shadow--2dp" },
+									React.createElement(
+											"div",
+											{ className: "mdl-card__supporting-text" },
+											React.createElement(
+													"button",
+													{ title: "Park your car", className: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect park-your-car mdl-button--colored", disabled: true },
+													React.createElement(
+															"i",
+															{ className: "material-icons" },
+															"directions_car"
+													)
+											),
+											React.createElement(
+													"button",
+													{ title: "Park your bike", className: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect park-your-bike mdl-button--colored" },
+													React.createElement(
+															"i",
+															{ className: "material-icons" },
+															"directions_bike"
+													)
+											)
+									)
+							),
+							React.createElement("br", null)
+					);
+			}
+	});
+
+	exports["default"] = Choice;
 	module.exports = exports["default"];
 
 /***/ }
