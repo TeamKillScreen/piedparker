@@ -28,7 +28,21 @@ var Main = React.createClass({displayName: 'Main',
 		};
 	},
 	componentWillMount: function() {
-		this.fireBaseBindings(this.state.crimeType);
+		var component = this;
+		var lon = this.state.lon;
+		var lat = this.state.lat;
+		
+		if (lon == "" || lat == "") {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				lat = position.coords.latitude;
+				lon = position.coords.longitude;
+				component.setState({ lon: lon, lat: lat});
+				component.fireBaseBindings(component.state.crimeType);
+			});
+		}
+		else {
+			this.fireBaseBindings(this.state.crimeType);
+		}
 	},
 	fireBaseBindings: function(crime) {
 		try
