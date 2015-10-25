@@ -33,7 +33,7 @@ var CarPark = React.createClass(
       };
 
       var numberOfSpaces = this.props.details.spaces > 0 ? this.props.details.spaces + ' ' : 'No '
-      var spacesText = this.props.details.state === 'Spaces' ? numberOfSpaces + 'Spaces' : 'Closed';
+      var spacesText = this.props.details.state === 'Spaces' ? numberOfSpaces + 'spaces' : 'Closed';
 
       return(
 				<div>

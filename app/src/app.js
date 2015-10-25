@@ -19789,7 +19789,7 @@
 	    };
 
 	    var numberOfSpaces = this.props.details.spaces > 0 ? this.props.details.spaces + ' ' : 'No ';
-	    var spacesText = this.props.details.state === 'Spaces' ? numberOfSpaces + 'Spaces' : 'Closed';
+	    var spacesText = this.props.details.state === 'Spaces' ? numberOfSpaces + 'spaces' : 'Closed';
 
 	    return React.createElement(
 	      'div',
@@ -19926,9 +19926,9 @@
 					React.createElement(
 						'div',
 						{ className: 'mdl-grid' },
-						React.createElement(Risk, { details: risk.currentMonth, name: 'Current Month' }),
-						React.createElement(Risk, { details: risk.highestMonth, name: 'Worst Month' }),
-						React.createElement(Risk, { details: risk.futureForecast, name: 'Furture Forcast' })
+						React.createElement(Risk, { details: risk.currentMonth, name: 'Recently' }),
+						React.createElement(Risk, { details: risk.highestMonth, name: 'Highest' }),
+						React.createElement(Risk, { details: risk.futureForecast, name: 'Predicted' })
 					)
 				);
 			} else {
@@ -19945,7 +19945,7 @@
 
 			var crimeTitle = "Bicycle Thefts";
 			if (this.props.crimeType == "crime") {
-				crimeTitle = "Vehicle Crime Stats";
+				crimeTitle = "Vehicle Crime";
 			}
 
 			return React.createElement(
