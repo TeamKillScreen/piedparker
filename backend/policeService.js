@@ -71,7 +71,7 @@ function getCrimeStats(location, date, distance, category)
           crimes: _.map(nearbyCrimes, mapper)
         });
       });
-    }, getRandomInt(0,2000));
+    }, getRandomInt(0,3000));
 
   });
 }

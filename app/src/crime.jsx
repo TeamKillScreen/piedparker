@@ -78,11 +78,6 @@ var Crime = React.createClass(
 						</div>
 					</div>
 					  {content}
-					  <div className="mdl-card__menu">
-					    <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-					      <i className="material-icons">menu</i>
-					    </button>
-					  </div>
 					</div>
 					<br />
 				</div>

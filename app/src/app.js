@@ -19841,19 +19841,6 @@
 	              riskIcon
 	            )
 	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'mdl-card__menu' },
-	          React.createElement(
-	            'button',
-	            { className: 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect' },
-	            React.createElement(
-	              'i',
-	              { className: 'material-icons' },
-	              'menu'
-	            )
-	          )
 	        )
 	      ),
 	      React.createElement('br', null)
@@ -19977,20 +19964,7 @@
 							)
 						)
 					),
-					content,
-					React.createElement(
-						'div',
-						{ className: 'mdl-card__menu' },
-						React.createElement(
-							'button',
-							{ className: 'mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect' },
-							React.createElement(
-								'i',
-								{ className: 'material-icons' },
-								'menu'
-							)
-						)
-					)
+					content
 				),
 				React.createElement('br', null)
 			);
