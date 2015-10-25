@@ -19834,7 +19834,7 @@
 	          ),
 	          React.createElement(
 	            'a',
-	            { id: 'uber', title: 'Park Mark Approved', style: parkMarkStyle, className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect' },
+	            { id: 'uber', title: hasParkMark ? "Park mark approved" : "Use with caution", style: parkMarkStyle, className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect' },
 	            React.createElement(
 	              'i',
 	              { className: 'material-icons' },
