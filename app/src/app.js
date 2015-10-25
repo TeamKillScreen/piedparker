@@ -19781,6 +19781,7 @@
 
 	    var hasParkMark = this.props.details.hasParkMark !== undefined ? this.props.details.hasParkMark : false;
 	    var riskCss = hasParkMark ? 'rgb(76,175,80)' : 'rgb(255,152,0)';
+	    var riskIcon = hasParkMark ? 'verified_user' : 'warning';
 
 	    var parkMarkStyle = {
 	      float: 'right',
@@ -19844,7 +19845,7 @@
 	            React.createElement(
 	              'i',
 	              { className: 'material-icons' },
-	              hasParkMark ? 'verified_user' : 'warning'
+	              riskIcon
 	            )
 	          )
 	        ),

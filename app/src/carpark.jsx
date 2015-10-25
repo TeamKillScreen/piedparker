@@ -25,6 +25,7 @@ var CarPark = React.createClass(
 
       var hasParkMark = this.props.details.hasParkMark !== undefined ? this.props.details.hasParkMark : false;
       var riskCss = hasParkMark ? 'rgb(76,175,80)' : 'rgb(255,152,0)';
+      var riskIcon = hasParkMark ? 'verified_user' : 'warning';
 
       var parkMarkStyle = {
         float: 'right',
@@ -52,7 +53,7 @@ var CarPark = React.createClass(
 								<i className="material-icons">local_taxi</i>
 							</a>
               <a id="uber" title="Park Mark Approved" style={parkMarkStyle} className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
-								<i className="material-icons">{hasParkMark ? 'verified_user' : 'warning'}</i>
+								<i className="material-icons">{riskIcon}</i>
 							</a>
 					  </div>
 					  <div className="mdl-card__menu">
