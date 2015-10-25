@@ -18,7 +18,7 @@ var Main = React.createClass({displayName: 'Main',
 		var lon = getParameterByName('lon');
 		var lat = getParameterByName('lat');
 		var mode = getParameterByName('mode');
-		
+
 		return {
 			parking: [],
 			lon: lon,
@@ -31,7 +31,7 @@ var Main = React.createClass({displayName: 'Main',
 		var component = this;
 		var lon = this.state.lon;
 		var lat = this.state.lat;
-		
+
 		if (lon == "" || lat == "") {
 			navigator.geolocation.getCurrentPosition(function(position) {
 				lat = position.coords.latitude;
@@ -52,22 +52,22 @@ var Main = React.createClass({displayName: 'Main',
 			this.unbind("location");
 		} catch (e) {
 		}
-		
+
 		var component = this;
-		
+
 		var binding = function(url) {
 				var firebaseParkingRef = new Firebase(url + "/parking");
 				component.bindAsArray(firebaseParkingRef.limitToLast(25), 'parking');
-				
+
 				var firebaseCrimeRef = new Firebase(url + "/" + crime);
 				component.bindAsArray(firebaseCrimeRef.limitToLast(25), 'crime');
-				
+
 				var firebaseLocationRef = new Firebase(url + "/location");
 				component.bindAsArray(firebaseLocationRef.limitToLast(25), 'location');
-				
+
 				component.setState({fireBaseUrl: url, crimeType: crime});
 			};
-		
+
 		if (component.state.mode == 'test') {
 			binding('https://piedparker.firebaseio.com/test');
 		}
@@ -86,11 +86,11 @@ var Main = React.createClass({displayName: 'Main',
 	render: function() {
 		var parking = (<div></div>);
 		if (this.state.crimeType == "crime")
-		{		 
+		{
 			parking = (
 				<div>
 					<Map details={this.state.parking} lon={this.state.lon} lat={this.state.lat} />
-					<CarParks details={this.state.parking} total={this.state.parking.length} />
+					<CarParks details={this.state.parking} total={this.state.parking.length} lon={this.state.lon} lat={this.state.lat} />
 				</div>
 			);
 		}

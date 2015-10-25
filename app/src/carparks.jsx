@@ -4,12 +4,13 @@ var CarPark = require('./carpark.jsx')
 var CarParks = React.createClass(
   {
     render: function(){
+      var component = this;
 		var carparks = this.props.details.map(function(carpark, index) {
 			return (
-				<CarPark key={index} details={carpark} />
+				<CarPark key={index} details={carpark} lon={component.props.lon} lat={component.props.lat} />
 			)
 		});
-		
+
 		var loader = (<div></div>);
 		if (this.props.total == 0) {
 			loader = (
@@ -25,7 +26,7 @@ var CarParks = React.createClass(
 						</div>
 					</div>
 					<br />
-				</div>	
+				</div>
 			)};
       return(
 				<div>
