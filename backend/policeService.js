@@ -127,6 +127,8 @@ function getAllCrimeStats (location, distance, category) {
   var promises = [];
 
   var dates = [
+    "2015-10",
+    "2015-09",
     "2015-08",
     "2015-07",
     "2015-06",
@@ -137,8 +139,6 @@ function getAllCrimeStats (location, distance, category) {
     "2015-01",
     "2014-12",
     "2014-11",
-    "2014-10",
-    "2014-09",
   ];
 
   _.each(dates, function (date) {
@@ -155,7 +155,7 @@ function getAllCrimeStatsAndAnalysis (location, distance, category) {
 
   return new Promise(function (resolve, reject) {
     getAllCrimeStats(location, distance, category).then(function (data) {
-      var monthToForecast = "2015-10";
+      var monthToForecast = "2015-12";
 
       var futureForecast = forecastCrimeNumbers(data, monthToForecast);
       var futureForecastRisk = calculateRisk(futureForecast);
@@ -219,7 +219,7 @@ function dateToXPoint(date)
 
 function forecastCrimeNumbers(data, monthToPredict)
 {
-  monthToPredict = monthToPredict || "2015-10";
+  monthToPredict = monthToPredict || "2015-12";
 
   var x = [];
   var y = [];
